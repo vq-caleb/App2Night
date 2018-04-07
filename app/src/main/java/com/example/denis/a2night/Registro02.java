@@ -15,6 +15,7 @@ public class Registro02 extends AppCompatActivity {
         setContentView(R.layout.activity_registro02);
         getSupportActionBar().hide();
 
+        /*
         Button MiBoton = (Button) findViewById(R.id.btnRegistrarse);
 
         MiBoton.setOnClickListener(new View.OnClickListener(){
@@ -34,6 +35,7 @@ public class Registro02 extends AppCompatActivity {
                 startActivity(intento2);
             }
         });
+        */
 
     }
 }
