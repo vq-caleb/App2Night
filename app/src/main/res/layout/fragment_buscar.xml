@@ -106,7 +106,7 @@
                             app:srcCompat="@android:color/holo_red_dark" />
 
                         <ImageView
-                            android:id="@+id/imageView6"
+                            android:id="@+id/perfilFrat"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
@@ -121,7 +121,7 @@
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView6"
+                            app:layout_constraintStart_toEndOf="@+id/perfilFrat"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@android:color/holo_orange_dark" />
 
@@ -156,7 +156,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView25"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                            app:layout_constraintTop_toBottomOf="@+id/perfilFrat" />
 
                         <TextView
                             android:id="@+id/textView27"

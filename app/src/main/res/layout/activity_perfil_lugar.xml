@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView01"
+        android:id="@+id/cantidadSeguidores"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_marginEnd="8dp"
@@ -54,10 +54,10 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView01" />
+        app:layout_constraintTop_toBottomOf="@+id/cantidadSeguidores" />
 
     <TextView
-        android:id="@+id/textView03"
+        android:id="@+id/cantidadAsistentes"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_marginEnd="8dp"
@@ -81,10 +81,10 @@
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView03" />
+        app:layout_constraintTop_toBottomOf="@+id/cantidadAsistentes" />
 
     <TextView
-        android:id="@+id/textView05"
+        android:id="@+id/nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -99,7 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView06"
+        android:id="@+id/etiquetaUbicacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -108,7 +108,7 @@
         android:text="La Calle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView05" />
+        app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
     <Button
         android:id="@+id/button01"
@@ -122,7 +122,7 @@
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView06" />
+        app:layout_constraintTop_toBottomOf="@+id/etiquetaUbicacion" />
 
 
 </android.support.constraint.ConstraintLayout>
