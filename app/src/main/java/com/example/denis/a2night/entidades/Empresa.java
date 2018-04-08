@@ -1,12 +1,19 @@
 package com.example.denis.a2night.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Anthony on 7/4/2018.
  */
 
 public class Empresa {
-    private String nombre, etiquetaUbicacion;
-    private int cantidadSeguidores, cantidadAsistentes;
+    private String nombre, etiquetaUbicacion, telefono1, telefono2, correo, descripcion,codigoVestimenta, entrada,
+            tipoNegocio, paginaFacebook, paginaInstagram, paginaTwitter  ;
+    private int cantidadSeguidores, cantidadAsistentes, calificacion;
+    private List<Publicacion> publicaciones = new ArrayList<Publicacion>();
+    private List<Producto> menu = new ArrayList<Producto>();
+    // ubicacion googleMaps, listaDeUsuariosSeguidores, imagenPortada, imagenPerfil, horario
 
     public Empresa(String nombre, String etiquetaUbicacion, int cantidadSeguidores, int cantidadAsistentes) {
         this.nombre = nombre;

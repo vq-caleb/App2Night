@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.denis.a2night.entidades.Empresa;
 
 public class PerfilLugar extends AppCompatActivity {
-    static Empresa empresa = new Empresa("Frat House", "La Calle",999999, 230);
+    static Empresa empresa = new Empresa("Frat House", "La Calle",1450, 230);
     TextView nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
     ImageView fotoPerfilEmpresa;
 
