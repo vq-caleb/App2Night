@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        ImageView MiImageView = (ImageView) findViewById(R.id.imgAtras);
+        ImageView MiImageView = (ImageView) findViewById(R.id.imgAtrasBuscar);
         MiImageView.setOnClickListener(new View.OnClickListener(){
 
             @Override
