@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class Empresa {
-    private String nombre, etiquetaUbicacion, telefono1, telefono2, correo, descripcion,codigoVestimenta, entrada,
+    private String nombre, etiquetaUbicacion, telefono1, telefono2, correo, descripcion, codigoVestimenta, entrada,
             tipoNegocio, paginaFacebook, paginaInstagram, paginaTwitter  ;
     private int cantidadSeguidores, cantidadAsistentes, calificacion;
     private List<Publicacion> publicaciones = new ArrayList<Publicacion>();
@@ -61,11 +61,11 @@ public class Empresa {
             return Integer.toString(this.cantidadSeguidores);
         } else if (this.cantidadSeguidores < 10000){
             nuevoFormato = temp.substring(0,temp.length()-2);
-            nuevoFormato = nuevoFormato.charAt(0)+"."+nuevoFormato.charAt(1);
+            nuevoFormato = nuevoFormato.charAt(0)+","+nuevoFormato.charAt(1);
         } else if (this.cantidadSeguidores < 1000000){
             nuevoFormato = temp.substring(0,temp.length()-3);
         }
-        nuevoFormato = nuevoFormato.concat("K");
+        nuevoFormato = nuevoFormato.concat("k");
         return nuevoFormato;
     }
 }
