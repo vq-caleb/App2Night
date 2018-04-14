@@ -31,7 +31,7 @@
         android:layout_marginStart="8dp"
         android:text="Correo electrónico"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/loginEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,13 +45,13 @@
         android:layout_marginStart="8dp"
         android:text="Contraseña"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/editText4"
+        app:layout_constraintBottom_toTopOf="@+id/loginPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/loginEmail"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginEnd="16dp"
@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/loginPassword"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginEnd="16dp"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
 
     <Button
         android:id="@+id/btnIniciar"
@@ -99,7 +99,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
     <ImageView
         android:id="@+id/imgAtrasBuscar"

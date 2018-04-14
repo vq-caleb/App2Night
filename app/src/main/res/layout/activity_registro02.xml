@@ -8,7 +8,7 @@
     tools:context="com.example.denis.a2night.Registro02">
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/registerName"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginEnd="16dp"
@@ -20,12 +20,13 @@
         android:inputType="textPersonName"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/registerLastName"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginEnd="16dp"
@@ -38,20 +39,20 @@
         android:textColorLink="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/registerName" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Escribe tu apellido"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/registerLastName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -78,7 +79,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/registerBirthday" />
 
     <ImageView
         android:id="@+id/imgAtras02"
@@ -101,7 +102,7 @@
         android:layout_marginStart="8dp"
         android:text="Escribe tu nombre"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/editText5"
+        app:layout_constraintBottom_toTopOf="@+id/registerName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent" />
@@ -111,10 +112,10 @@
         android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="80dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2">
+        app:layout_constraintTop_toTopOf="@+id/registerLastName">
 
         <RadioButton
             android:id="@+id/radioButton"
@@ -122,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="@android:color/background_light"
-            android:text="H"
+            android:text="F"
             android:textColor="@android:color/background_light" />
 
         <RadioButton
@@ -144,18 +145,18 @@
         android:layout_marginStart="16dp"
         android:text="Fecha de nacimiento"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/editText6"
+        app:layout_constraintBottom_toTopOf="@+id/registerBirthday"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/registerBirthday"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/border"
         android:backgroundTint="@android:color/background_light"
         android:ems="10"
@@ -163,7 +164,7 @@
         app:layout_constraintEnd_toStartOf="@+id/rg"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toTopOf="@+id/registerLastName" />
 
     <TextView
         android:id="@+id/textView2"

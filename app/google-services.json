@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "909299161819",
+    "firebase_url": "https://tonightcr.firebaseio.com",
+    "project_id": "tonightcr",
+    "storage_bucket": "tonightcr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909299161819:android:83b920fd5a81025c",
+        "android_client_info": {
+          "package_name": "com.example.denis.a2night"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909299161819-9kmr2q7ul6rns9phb9sga5j6ti3jr83g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.denis.a2night",
+            "certificate_hash": "6296a7ec17ac9d1a598540e2b4d447508a411b6d"
+          }
+        },
+        {
+          "client_id": "909299161819-6fieli071dogc0hsejp4tjd6gaj5lm1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaa-vdFGIj5h77geA9Vb-KxxweV0kgh9o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909299161819-6fieli071dogc0hsejp4tjd6gaj5lm1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
