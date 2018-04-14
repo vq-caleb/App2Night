@@ -1,6 +1,7 @@
 package com.example.denis.a2night.entidades;
 
 /**
+<<<<<<< HEAD
  * Created by Steven on 13/04/2018.
  */
 
