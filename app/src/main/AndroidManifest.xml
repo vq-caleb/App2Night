@@ -22,7 +22,6 @@
             android:name=".Navegador"
             android:label="@string/title_inicio"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".PerfilLugar" />
         <activity android:name=".Registro02" />
     </application>
 

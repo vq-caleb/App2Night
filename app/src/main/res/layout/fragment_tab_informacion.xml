@@ -12,19 +12,18 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView47"
+            android:id="@+id/tipoEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Bar"
+            android:text="-"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteY="8dp" />
 
         <RatingBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/calificacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -32,7 +31,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView47" />
+            app:layout_constraintTop_toBottomOf="@+id/tipoEmpresa" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -41,18 +40,18 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+            app:layout_constraintTop_toBottomOf="@+id/calificacion"
             app:srcCompat="@drawable/ic_phone_black_24dp" />
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/numTelefonos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            android:text="2257-0582"
+            android:text="- "
             app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+            app:layout_constraintTop_toBottomOf="@+id/calificacion" />
 
         <ImageView
             android:id="@+id/imageView14"
@@ -65,14 +64,14 @@
             app:srcCompat="@drawable/ic_email_black_24dp" />
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/correoElectronico"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="19dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="14dp"
-            android:text="frathousecr@gmail.com"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toBottomOf="@+id/numTelefonos" />
 
         <ImageView
             android:id="@+id/imageView15"
@@ -85,14 +84,14 @@
             app:srcCompat="@drawable/ic_attach_money_black_24dp" />
 
         <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/costoEntrada"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="14dp"
-            android:text="2000"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@+id/imageView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintTop_toBottomOf="@+id/correoElectronico" />
 
         <ImageView
             android:id="@+id/imageView16"
@@ -105,14 +104,14 @@
             app:srcCompat="@drawable/ic_directions_walk_black_24dp" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/codigoVestimenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="14dp"
-            android:text="Casual"
+            android:text="-"
             app:layout_constraintStart_toEndOf="@+id/imageView16"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+            app:layout_constraintTop_toBottomOf="@+id/costoEntrada" />
 
         <ImageView
             android:id="@+id/imageView17"
@@ -125,7 +124,7 @@
             app:srcCompat="@drawable/ic_access_time_black_24dp" />
 
         <TextView
-            android:id="@+id/textView33"
+            android:id="@+id/estadoHorario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -134,88 +133,89 @@
             android:textColor="@android:color/holo_green_dark"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView17"
-            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+            app:layout_constraintTop_toBottomOf="@+id/codigoVestimenta" />
 
         <TextView
-            android:id="@+id/textView34"
+            android:id="@+id/horarioLunes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
             android:text="Lunes: 3:00pm - 2:00am"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+            app:layout_constraintTop_toBottomOf="@+id/estadoHorario" />
 
         <TextView
-            android:id="@+id/textView35"
+            android:id="@+id/horarioMartes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
             android:text="Martes: 3:00pm - 2:00am"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+            app:layout_constraintTop_toBottomOf="@+id/horarioLunes" />
 
         <TextView
-            android:id="@+id/textView36"
+            android:id="@+id/horarioMiercoles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="10dp"
             android:text="Miércoles: 3:00pm - 2:00am"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+            app:layout_constraintTop_toBottomOf="@+id/horarioMartes" />
 
         <TextView
-            android:id="@+id/textView37"
+            android:id="@+id/horarioJueves"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
             android:text="Jueves: 3:00pm - 2:00am"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView36" />
+            app:layout_constraintTop_toBottomOf="@+id/horarioMiercoles" />
 
         <TextView
-            android:id="@+id/textView38"
+            android:id="@+id/horarioViernes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
             android:text="Viernes: 3:00pm - 2:00am"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+            app:layout_constraintTop_toBottomOf="@+id/horarioJueves" />
 
         <TextView
-            android:id="@+id/textView39"
+            android:id="@+id/horarioSabado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
             android:text="Sábado: 3:00pm - 2:00am"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView38" />
+            app:layout_constraintTop_toBottomOf="@+id/horarioViernes" />
 
         <TextView
-            android:id="@+id/textView40"
+            android:id="@+id/horarioDomingo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
             android:text="Domingo: CERRADO"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+            app:layout_constraintTop_toBottomOf="@+id/horarioSabado" />
 
         <TextView
-            android:id="@+id/textView41"
+            android:id="@+id/paginaFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="14dp"
-            android:text="facebook.com/frathousecr"
+            android:autoLink="web"
+            android:text="-"
             android:textColor="@android:color/holo_blue_dark"
             app:layout_constraintStart_toEndOf="@+id/imageView18"
-            app:layout_constraintTop_toBottomOf="@+id/textView40" />
+            app:layout_constraintTop_toBottomOf="@+id/horarioDomingo" />
 
         <ImageView
             android:id="@+id/imageView18"
@@ -224,39 +224,32 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView40"
+            app:layout_constraintTop_toBottomOf="@+id/horarioDomingo"
             app:srcCompat="@drawable/ic_web_black_24dp" />
 
         <TextView
-            android:id="@+id/textView42"
+            android:id="@+id/paginaInstagram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
-            android:text="instagram.com/frahhousecr"
+            android:autoLink="web"
+            android:text="-"
             android:textColor="@android:color/holo_blue_dark"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView41" />
+            app:layout_constraintTop_toBottomOf="@+id/paginaFacebook" />
 
         <TextView
-            android:id="@+id/textView43"
+            android:id="@+id/paginaTwitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
-            android:text="twitter.com/frathousecr"
+            android:autoLink="web"
+            android:text="-"
             android:textColor="@android:color/holo_blue_dark"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView42" />
-
-        <TextView
-            android:id="@+id/textView44"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="/ 8845-5465"
-            app:layout_constraintStart_toEndOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+            app:layout_constraintTop_toBottomOf="@+id/paginaInstagram" />
 
         <ImageView
             android:id="@+id/imageView19"
@@ -266,7 +259,7 @@
             android:layout_marginTop="8dp"
             app:srcCompat="@drawable/ic_import_contacts_black_24dp"
             app:layout_constraintEnd_toStartOf="@+id/textView48"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintTop_toBottomOf="@+id/correoElectronico" />
 
         <TextView
             android:id="@+id/textView48"
@@ -276,7 +269,7 @@
             android:layout_marginTop="12dp"
             android:text="Ver menú"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintTop_toBottomOf="@+id/correoElectronico" />
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
