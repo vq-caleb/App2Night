@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,11 @@ import android.widget.TextView;
 
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Empresa;
+import com.example.denis.a2night.entidades.Horario;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +30,7 @@ public class PerfilNegocio extends Fragment {
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     TextView nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
     ImageView fotoPerfilEmpresa;
-
+    Empresa empresa;
     public PerfilNegocio() {
         // Required empty public constructor
     }
@@ -41,6 +47,7 @@ public class PerfilNegocio extends Fragment {
                 transaction.replace(R.id.content, new Buscar()).commit();
             }
         });
+        alambrarVariables(view);
 
         OnclickDelTextView(R.id.info, view);
         OnclickDelTextView(R.id.promo, view);
@@ -48,9 +55,85 @@ public class PerfilNegocio extends Fragment {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.contenido, new TabPost()).commit();
 
-        this.alambrarVariables(view);
-        this.completarInformacion();
+        this.cargaEmpresa();
         return view;
+    }
+
+    public void cargaEmpresa(){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        db.getReference().child("Bares")
+                .orderByKey()
+                .equalTo("frathousecr")
+                .addValueEventListener(new ValueEventListener() {
+                                           @Override
+                                           public void onDataChange(DataSnapshot dataSnapshot)
+                                           {
+                                               for (DataSnapshot child : dataSnapshot.getChildren())
+                                               {
+                                                   String nombre = (String) child.child("nombre").getValue();
+                                                   String etiquetaUbicacion = (String) child.child("etiquetaUbicacion").getValue();
+                                                   String telefono1 = (String) child.child("telefono1").getValue();
+                                                   String telefono2 = (String) child.child("telefono2" ).getValue();
+                                                   String correo = (String) child.child("correo").getValue();
+                                                   String descripcion = (String) child.child("descripcion").getValue();
+                                                   String codigoVestimenta = (String) child.child("codigoVestimenta").getValue();
+                                                   String entrada = (String) child.child("entrada").getValue();
+                                                   String tipoNegocio = (String) child.child("tipoNegocio").getValue();
+                                                   String paginaFacebook = (String) child.child("paginaFacebook").getValue();
+                                                   String paginaInstagram = (String) child.child("paginaInstagram").getValue();
+                                                   String paginaTwitter = (String) child.child("paginaTwitter").getValue();
+                                                   int cantidadAsistentes =  Integer.parseInt((String) child.child("cantidadAsistentes").getValue());
+                                                   List<Horario> horarioSemanal = null;
+                                                   empresa = new Empresa( nombre, etiquetaUbicacion, cantidadAsistentes,  tipoNegocio,
+                                                           paginaFacebook,  paginaInstagram, paginaTwitter,  telefono1,
+                                                           telefono2,  correo, descripcion,  codigoVestimenta,  entrada, horarioSemanal);
+
+
+                                                   // HERE WHAT CORRESPONDS TO JOIN
+                                                   FirebaseDatabase db = FirebaseDatabase.getInstance();
+                                                   db.getReference()
+                                                           .child("HorarioBar")
+                                                           .orderByKey()
+                                                           .equalTo("frathousecr")
+                                                           .addValueEventListener(
+                                                                   new ValueEventListener()
+                                                                   {
+                                                                       @Override
+                                                                       public void onDataChange(DataSnapshot dataSnapshot)
+                                                                       {
+                                                                           List<Horario> horarioSemanal = new ArrayList<Horario>();
+
+                                                                           for (DataSnapshot child : dataSnapshot.getChildren()){
+                                                                               for(int i=0; i<7;i++){
+                                                                                   String dia = (String) child.child(""+i).child("dia").getValue();
+                                                                                   String horarioApertura = (String) child.child(""+i).child("horarioApertura").getValue();
+                                                                                   String horarioCierre = (String) child.child(""+i).child("horarioCierre").getValue();
+                                                                                   boolean abierto =  Boolean.parseBoolean((String)child.child(""+i).child("abierto").getValue());
+                                                                                   Horario h = new Horario(dia,horarioApertura,horarioCierre,abierto);
+                                                                                   horarioSemanal.add(h);
+                                                                               }
+                                                                               empresa.setHorarioSemanal(horarioSemanal);
+                                                                               aGlobal.setEmpresa(empresa);
+                                                                               completarInformacion();
+                                                                           }
+                                                                       }
+
+                                                                       @Override
+                                                                       public void onCancelled(DatabaseError databaseError)
+                                                                       {
+                                                                           Log.d("---OBJECT-----","-----ERROR---");
+                                                                       }
+                                                                   }
+                                                           );
+                                               }
+                                           }
+                                           @Override
+                                           public void onCancelled(DatabaseError databaseError)
+                                           {
+                                               Log.d("---OBJECT-----","-----ERROR2-----");
+                                           }
+                                       }
+                );
     }
 
     public void completarInformacion(){

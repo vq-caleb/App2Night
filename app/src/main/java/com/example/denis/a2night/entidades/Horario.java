@@ -17,6 +17,13 @@ public class Horario {
         this.estaAbierto = true;
     }
 
+    public Horario(String dia, String horaAbierto, String horaCierre,boolean estaAbierto) {
+        this.dia = dia;
+        this.horaAbierto = horaAbierto;
+        this.horaCierre = horaCierre;
+        this.estaAbierto = estaAbierto;
+    }
+
     public Horario(boolean estaAbierto) {
         if (!estaAbierto){
             this.estaAbierto = false;

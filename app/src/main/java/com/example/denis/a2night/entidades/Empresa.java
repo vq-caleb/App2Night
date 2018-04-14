@@ -27,6 +27,9 @@ public class Empresa {
     private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
     private List<Horario> horarioSemanal;
 
+
+    public Empresa(){}
+
     // ubicacion googleMaps, listaDeUsuariosSeguidores, imagenPortada, imagenPerfil, horario
 
     public Empresa(String nombre, String etiquetaUbicacion, int cantidadAsistentes, String tipoNegocio,
@@ -46,8 +49,8 @@ public class Empresa {
         this.paginaInstagram = paginaInstagram;
         this.paginaTwitter = paginaTwitter;
         this.horarioSemanal = horarioSemanal;
-        this.calificaciones.add(new Calificacion(new Usuario("anthony"),4.5f));
-        this.calificaciones.add(new Calificacion(new Usuario("caleb"),4.5f));
+        this.calificaciones.add(new Calificacion(new Usuario("soto.2808@gmail.com","Anthony","Soto",false,false,"28/08/97","M"),4.5f));
+        this.calificaciones.add(new Calificacion(new Usuario("s.calderon3010@gmail.com","Steven","Calderon",false,false,"30/10/96","M"),4.5f));
     }
 
     public String getNombre() {
@@ -220,5 +223,9 @@ public class Empresa {
         }
         nuevoFormato = nuevoFormato.concat("k");
         return nuevoFormato;
+    }
+
+    public String imprimir(){
+        return "Nombre: "+nombre+"  Pagina Facebook: "+paginaFacebook+ "Horario"+ this.horarioSemanal.toString();
     }
 }

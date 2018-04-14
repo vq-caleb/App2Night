@@ -12,13 +12,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.denis.a2night.entidades.Empresa;
+import com.example.denis.a2night.entidades.Horario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
@@ -26,6 +36,7 @@ public class Login extends AppCompatActivity {
     private EditText password;
     // [START declare_auth]
     private FirebaseAuth mAuth;
+    private Empresa empresa;
     // [END declare_auth]
 
     @Override
@@ -40,6 +51,8 @@ public class Login extends AppCompatActivity {
         // Inicializando autenticación
         mAuth = FirebaseAuth.getInstance();
         OnclickDelButton(R.id.btnIniciar);
+        OnclickImageView(R.id.imgAtrasBuscar);
+
     }
 
     @Override
@@ -135,13 +148,29 @@ public class Login extends AppCompatActivity {
                         iniciarSesion();
                         break;
 
-                    case R.id.btnInicio:
-                        vuelveInicio();
                     default:break; }
             }
         });
     }// fin Onclick
 
+
+    public void OnclickImageView(int ref) {
+        View view =findViewById(ref);
+        ImageView miImageView = (ImageView) view;
+
+        miImageView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.imgAtrasBuscar:
+                        vuelveInicio();
+                        break;
+
+                    default:break;
+                }
+            }
+        });
+    }// fin de OnclickIV
 }
 
 

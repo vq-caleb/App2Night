@@ -30,6 +30,7 @@ public class Buscar extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_buscar, container, false);
         ImageView MiImageView = (ImageView) view.findViewById(R.id.perfilFrat);
+
         MiImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){

@@ -22,6 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import com.example.denis.a2night.entidades.Usuario;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Registro02 extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -117,7 +120,14 @@ public class Registro02 extends AppCompatActivity {
             String lastName = this.lastName.getText().toString();
             String birthday = this.birthday.getText().toString();
 
-            Usuario usuario = new Usuario(name, lastName, "false", "false", birthday, gender);
+            Map<String,String> usuario = new HashMap<>();
+            usuario.put("nombre",name);
+            usuario.put("apellidos",lastName);
+            usuario.put("fechaNacimiento",birthday);
+            usuario.put("confirmado","false");
+            usuario.put("anonimo","false");
+            usuario.put("genero",gender);
+
 
             Mensaje("Usuario: "+mAuth.getCurrentUser().toString());
 
@@ -205,15 +215,11 @@ public class Registro02 extends AppCompatActivity {
                 switch (v.getId()) {
 
                     case R.id.radioButton:
-                        Mensaje("BTN1");
                         gender = "F";
-                        Mensaje(""+gender);
                         break;
 
                     case R.id.radioButton2:
-                        Mensaje("BTN2");
                         gender = "M";
-                        Mensaje(""+gender);
 
                         break;
                     default:break; }

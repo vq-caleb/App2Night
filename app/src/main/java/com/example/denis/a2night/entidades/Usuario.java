@@ -6,25 +6,34 @@ package com.example.denis.a2night.entidades;
  */
 
 public class Usuario {
-    public String nombre;
-    public String apellidos;
-    public String anonimo;
-    public String confirmado;
-    public String fechaNacimiento;
-    public String genero;
-
+    private String correo;
+    private String nombre;
+    private String apellidos;
+    private boolean anonimo;
+    private boolean confirmado;
+    private String fechaNacimiento;
+    private String genero;
 
     public Usuario() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+
     }
 
-    public Usuario(String nombre, String apellidos, String anonimo, String confirmado, String fechaNacimiento, String genero) {
+    public Usuario(String correo, String nombre, String apellidos, boolean anonimo, boolean confirmado, String fechaNacimiento, String genero) {
+        this.correo = correo;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.anonimo = anonimo;
         this.confirmado = confirmado;
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getNombre() {
@@ -43,19 +52,19 @@ public class Usuario {
         this.apellidos = apellidos;
     }
 
-    public String getAnonimo() {
+    public boolean isAnonimo() {
         return anonimo;
     }
 
-    public void setAnonimo(String anonimo) {
+    public void setAnonimo(boolean anonimo) {
         this.anonimo = anonimo;
     }
 
-    public String getConfirmado() {
+    public boolean isConfirmado() {
         return confirmado;
     }
 
-    public void setConfirmado(String confirmado) {
+    public void setConfirmado(boolean confirmado) {
         this.confirmado = confirmado;
     }
 
