@@ -60,9 +60,7 @@ public class Registro02 extends AppCompatActivity {
         OnclickRadioButton(R.id.radioButton2);
 
         String encodeUser = EncodeString(mAuth.getCurrentUser().toString());
-
-        Mensaje("Usuario: "+encodeUser);
-
+        
     }
 
     //-------------------------------- Funcionalidad -----------------------------------------------------------
@@ -127,9 +125,6 @@ public class Registro02 extends AppCompatActivity {
             usuario.put("confirmado","false");
             usuario.put("anonimo","false");
             usuario.put("genero",gender);
-
-
-            Mensaje("Usuario: "+mAuth.getCurrentUser().toString());
 
             String encodeUser = EncodeString(mAuth.getCurrentUser().toString());
 

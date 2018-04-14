@@ -77,7 +77,6 @@ public class Registro01 extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                           Mensaje("Registro Correcto");
                            FirebaseUser user = mAuth.getCurrentUser();
                            registro02();
                         } else {
