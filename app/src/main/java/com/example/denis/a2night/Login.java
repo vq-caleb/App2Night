@@ -97,7 +97,7 @@ public class Login extends AppCompatActivity {
 
                         // [START_EXCLUDE]
                         if (!task.isSuccessful()) {
-                         Mensaje("Ha ocurrido un error");
+                         Mensaje("Verifique correo y contraseña");
                         }
 
                     }
