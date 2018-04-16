@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:verticalSpacing="4dp"
         android:horizontalSpacing="4dp"
+        android:columnWidth="250dp"
         android:stretchMode="columnWidth"
         android:numColumns="3"/>
 

@@ -46,7 +46,7 @@ public class GridViewAdapter extends BaseAdapter {
         final ImageView imageView;
         if(convertView == null){
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(250, 500));
+            imageView.setLayoutParams(new GridView.LayoutParams(250, 250));
             imageView.setImageResource(lstSource.get(position));
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
