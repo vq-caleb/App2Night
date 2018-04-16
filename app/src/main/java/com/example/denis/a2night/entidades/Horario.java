@@ -72,7 +72,7 @@ public class Horario {
     }
 
     public int getSoloMinAbierto(){
-        return Integer.parseInt(this.horaAbierto.toString().substring(2,4));
+        return Integer.parseInt(this.horaAbierto.toString().substring(3,5));
     }
 
     public int getSoloHoraCierre(){
@@ -80,7 +80,7 @@ public class Horario {
     }
 
     public int getSoloMinCierre(){
-        return Integer.parseInt(this.horaCierre.toString().substring(2,4));
+        return Integer.parseInt(this.horaCierre.toString().substring(3,5));
     }
 
     public boolean estaAbierto(int hora, int min){

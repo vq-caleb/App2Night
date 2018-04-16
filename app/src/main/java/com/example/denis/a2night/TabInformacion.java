@@ -105,7 +105,7 @@ public class TabInformacion extends Fragment {
         if (estado){
             this.estadoHorario.setText("ABIERTO");
         } else {
-            this.estadoHorario.setText("ABIERTO");
+            this.estadoHorario.setText("CERRADO");
         }
     }
 

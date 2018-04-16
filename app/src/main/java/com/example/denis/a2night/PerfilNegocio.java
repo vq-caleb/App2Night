@@ -54,7 +54,7 @@ public class PerfilNegocio extends Fragment {
         OnclickDelTextView(R.id.promo, view);
         OnclickDelTextView(R.id.evento, view);
 
-        TextView info01 = (TextView) view.findViewById(R.id.info);
+        TextView info01 = (TextView) view.findViewById(R.id.publicacion);
         info01.setTextColor(getResources().getColor(R.color.colorPrimary));
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.contenido, new TabPost()).commit();
