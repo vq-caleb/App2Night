@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class Empresa {
+    private String idEmpresa;
     private String nombre;
     private String etiquetaUbicacion;
     private String telefono1;
@@ -32,9 +33,10 @@ public class Empresa {
 
     // ubicacion googleMaps, listaDeUsuariosSeguidores, imagenPortada, imagenPerfil, horario
 
-    public Empresa(String nombre, String etiquetaUbicacion, int cantidadAsistentes, String tipoNegocio,
+    public Empresa(String idEmpresa,String nombre, String etiquetaUbicacion, int cantidadAsistentes, String tipoNegocio,
         String paginaFacebook, String paginaInstagram,String paginaTwitter, String telefono1, String telefono2, String correo,
                    String descripcion, String codigoVestimenta, String entrada, List<Horario> horarioSemanal) {
+        this.idEmpresa = idEmpresa;
         this.nombre = nombre;
         this.etiquetaUbicacion = etiquetaUbicacion;
         this.cantidadAsistentes = cantidadAsistentes;
@@ -52,6 +54,10 @@ public class Empresa {
         this.calificaciones.add(new Calificacion(new Usuario("soto.2808@gmail.com","Anthony","Soto",false,false,"28/08/97","M"),4.5f));
         this.calificaciones.add(new Calificacion(new Usuario("s.calderon3010@gmail.com","Steven","Calderon",false,false,"30/10/96","M"),4.5f));
     }
+
+    public String getIdEmpresa() {return idEmpresa;}
+
+    public void setIdEmpresa(String idEmpresa) {this.idEmpresa = idEmpresa;}
 
     public String getNombre() {
         return nombre;

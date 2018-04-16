@@ -31,6 +31,8 @@ public class PerfilNegocio extends Fragment {
     TextView nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
     ImageView fotoPerfilEmpresa;
     Empresa empresa;
+
+
     public PerfilNegocio() {
         // Required empty public constructor
     }
@@ -60,10 +62,11 @@ public class PerfilNegocio extends Fragment {
     }
 
     public void cargaEmpresa(){
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         db.getReference().child("Bares")
                 .orderByKey()
-                .equalTo("frathousecr")
+                .equalTo(aGlobal.getIdEmpresaActual())
                 .addValueEventListener(new ValueEventListener() {
                                            @Override
                                            public void onDataChange(DataSnapshot dataSnapshot)
@@ -79,12 +82,13 @@ public class PerfilNegocio extends Fragment {
                                                    String codigoVestimenta = (String) child.child("codigoVestimenta").getValue();
                                                    String entrada = (String) child.child("entrada").getValue();
                                                    String tipoNegocio = (String) child.child("tipoNegocio").getValue();
+                                                   Log.d("---empresaaaa-----",tipoNegocio);
                                                    String paginaFacebook = (String) child.child("paginaFacebook").getValue();
                                                    String paginaInstagram = (String) child.child("paginaInstagram").getValue();
                                                    String paginaTwitter = (String) child.child("paginaTwitter").getValue();
                                                    int cantidadAsistentes =  Integer.parseInt((String) child.child("cantidadAsistentes").getValue());
                                                    List<Horario> horarioSemanal = null;
-                                                   empresa = new Empresa( nombre, etiquetaUbicacion, cantidadAsistentes,  tipoNegocio,
+                                                   empresa = new Empresa(aGlobal.getIdEmpresaActual(), nombre, etiquetaUbicacion, cantidadAsistentes,  tipoNegocio,
                                                            paginaFacebook,  paginaInstagram, paginaTwitter,  telefono1,
                                                            telefono2,  correo, descripcion,  codigoVestimenta,  entrada, horarioSemanal);
 
@@ -94,7 +98,7 @@ public class PerfilNegocio extends Fragment {
                                                    db.getReference()
                                                            .child("HorarioBar")
                                                            .orderByKey()
-                                                           .equalTo("frathousecr")
+                                                           .equalTo(""+aGlobal.getIdEmpresaActual())
                                                            .addValueEventListener(
                                                                    new ValueEventListener()
                                                                    {

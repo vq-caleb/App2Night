@@ -97,13 +97,13 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/imageView5"
+                            android:id="@+id/einsteincr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginTop="8dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/holo_red_dark" />
+                            app:srcCompat="@drawable/einstein" />
 
                         <ImageView
                             android:id="@+id/perfilFrat"
@@ -111,29 +111,29 @@
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView5"
+                            app:layout_constraintStart_toEndOf="@+id/einsteincr"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/holo_orange_light" />
+                            app:srcCompat="@drawable/frat" />
 
                         <ImageView
-                            android:id="@+id/imageView11"
+                            android:id="@+id/xcapecr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             app:layout_constraintStart_toEndOf="@+id/perfilFrat"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/holo_orange_dark" />
+                            app:srcCompat="@drawable/xcape" />
 
                         <ImageView
-                            android:id="@+id/imageView12"
+                            android:id="@+id/caccioscr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView11"
+                            app:layout_constraintStart_toEndOf="@+id/xcapecr"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/holo_green_light" />
+                            app:srcCompat="@drawable/caccios" />
 
                         <TextView
                             android:id="@+id/textView25"
@@ -144,7 +144,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                            app:layout_constraintTop_toBottomOf="@+id/einsteincr" />
 
                         <TextView
                             android:id="@+id/textView26"
@@ -168,7 +168,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView26"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+                            app:layout_constraintTop_toBottomOf="@+id/xcapecr" />
 
                         <TextView
                             android:id="@+id/textView28"
@@ -180,7 +180,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView27"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+                            app:layout_constraintTop_toBottomOf="@+id/caccioscr" />
 
                     </android.support.constraint.ConstraintLayout>
                 </HorizontalScrollView>
@@ -198,43 +198,43 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/imageView8"
+                            android:id="@+id/saulbistrocr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView7"
+                            app:layout_constraintStart_toEndOf="@+id/entrenouscr"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@color/colorPrimary" />
+                            app:srcCompat="@drawable/saulbistro" />
 
                         <ImageView
-                            android:id="@+id/imageView7"
+                            android:id="@+id/entrenouscr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginTop="8dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@color/colorAccent" />
+                            app:srcCompat="@drawable/entrenous" />
 
                         <ImageView
-                            android:id="@+id/imageView9"
+                            android:id="@+id/aguizotescr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView8"
+                            app:layout_constraintStart_toEndOf="@+id/saulbistrocr"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@color/colorPrimaryDark" />
+                            app:srcCompat="@drawable/aguizotes" />
 
                         <ImageView
-                            android:id="@+id/imageView10"
+                            android:id="@+id/mercaditocr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView9"
+                            app:layout_constraintStart_toEndOf="@+id/aguizotescr"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/darker_gray" />
+                            app:srcCompat="@drawable/mercadoescalante" />
 
                         <TextView
                             android:id="@+id/textView8"
@@ -245,7 +245,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                            app:layout_constraintTop_toBottomOf="@+id/entrenouscr" />
 
                         <TextView
                             android:id="@+id/textView9"
@@ -257,7 +257,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView8"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                            app:layout_constraintTop_toBottomOf="@+id/saulbistrocr" />
 
                         <TextView
                             android:id="@+id/textView10"
@@ -269,7 +269,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView9"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                            app:layout_constraintTop_toBottomOf="@+id/aguizotescr" />
 
                         <TextView
                             android:id="@+id/textView11"
@@ -277,11 +277,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            android:text="Gallaway"
+                            android:text="Mercadito"
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView10"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                            app:layout_constraintTop_toBottomOf="@+id/mercaditocr" />
 
                     </android.support.constraint.ConstraintLayout>
 
@@ -300,43 +300,43 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/laconchacr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginTop="8dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/holo_blue_dark" />
+                            app:srcCompat="@drawable/laconcha" />
 
                         <ImageView
-                            android:id="@+id/imageView2"
+                            android:id="@+id/antikcr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView"
+                            app:layout_constraintStart_toEndOf="@+id/laconchacr"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/holo_blue_bright" />
+                            app:srcCompat="@drawable/antik" />
 
                         <ImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/lacalicr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView2"
+                            app:layout_constraintStart_toEndOf="@+id/antikcr"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/holo_blue_light" />
+                            app:srcCompat="@drawable/lacali" />
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/cuartelcr"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView3"
+                            app:layout_constraintStart_toEndOf="@+id/lacalicr"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@android:color/holo_purple" />
+                            app:srcCompat="@drawable/elcuartel" />
 
                         <TextView
                             android:id="@+id/textView18"
@@ -347,7 +347,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                            app:layout_constraintTop_toBottomOf="@+id/laconchacr" />
 
                         <TextView
                             android:id="@+id/textView19"
@@ -359,7 +359,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView18"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                            app:layout_constraintTop_toBottomOf="@+id/antikcr" />
 
                         <TextView
                             android:id="@+id/textView20"
@@ -371,7 +371,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView19"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                            app:layout_constraintTop_toBottomOf="@+id/lacalicr" />
 
                         <TextView
                             android:id="@+id/textView21"
@@ -383,7 +383,7 @@
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
                             app:layout_constraintStart_toEndOf="@+id/textView20"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                            app:layout_constraintTop_toBottomOf="@+id/cuartelcr" />
 
                     </android.support.constraint.ConstraintLayout>
                 </HorizontalScrollView>

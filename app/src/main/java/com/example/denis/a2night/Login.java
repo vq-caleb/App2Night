@@ -88,6 +88,7 @@ public class Login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Mensaje("Inicio de sesión corrrecto");
                             FirebaseUser user = mAuth.getCurrentUser();
+
                             Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
                             startActivity(intento1);
                         } else {

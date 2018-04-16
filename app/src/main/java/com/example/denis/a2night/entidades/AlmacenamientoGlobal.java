@@ -28,6 +28,7 @@ import java.util.Map;
 
 public class AlmacenamientoGlobal {
     private Empresa empresa ;
+    private String idEmpresaActual;
     private static AlmacenamientoGlobal instance = null;
 
     protected AlmacenamientoGlobal() {
@@ -46,5 +47,7 @@ public class AlmacenamientoGlobal {
         this.empresa = empresa;
     }
 
+    public String getIdEmpresaActual() {return idEmpresaActual;}
 
+    public void setIdEmpresaActual(String idEmpresaActual) {this.idEmpresaActual = idEmpresaActual;}
 }

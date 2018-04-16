@@ -35,7 +35,6 @@ public class TabInformacion extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_informacion, container, false);
-
         this.alambrarVariables(view);
         this.completarInformacion();
 
