@@ -25,6 +25,8 @@
             android:label="@string/title_inicio"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Registro02" />
+        <activity android:name=".RegistroEmpresa01" />
+        <activity android:name=".RegistroEmpresa02"></activity>
     </application>
 
 </manifest>

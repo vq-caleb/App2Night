@@ -22,10 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class PerfilNegocio extends Fragment {
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     TextView nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
