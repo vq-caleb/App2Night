@@ -24,36 +24,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
-    <EditText
-        android:id="@+id/companyRegisterDescription"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/border"
-        android:backgroundTint="@android:color/background_light"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColorLink="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/companyRegisterName" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Escribe una descripción breve"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/companyRegisterDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -71,9 +41,9 @@
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/bottom_rounded"
-        android:text="Registrar"
+        android:text="Registrarse"
         android:textColor="@android:color/holo_orange_dark"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +69,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Escribe el nombre"
+        android:text="¿Cúal es el nombre de tu empresa?"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/companyRegisterName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,11 +80,11 @@
         android:id="@+id/rg"
         android:layout_width="108dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="48dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/companyRegisterDescription">
+        app:layout_constraintTop_toBottomOf="@+id/companyRegisterInaugurationDate">
 
         <RadioButton
             android:id="@+id/radioButton3"
@@ -153,19 +123,18 @@
 
     <EditText
         android:id="@+id/companyRegisterInaugurationDate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/border"
         android:backgroundTint="@android:color/background_light"
         android:ems="10"
         android:inputType="date"
-        app:layout_constraintEnd_toStartOf="@+id/rg"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/companyRegisterDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/companyRegisterName" />
 
     <TextView
         android:id="@+id/textView2"
@@ -173,8 +142,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
-        android:text="Crear Empresa"
+        android:layout_marginTop="90dp"
+        android:text="Crear cuenta de empresa"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -186,24 +155,25 @@
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:text="Abreviatura Unica"
         android:textColor="@android:color/background_light"
-        app:layout_constraintTop_toBottomOf="@+id/companyRegisterInaugurationDate"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/companyRegisterPK"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/companyRegisterPK"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/border"
         android:backgroundTint="@android:color/background_light"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+        app:layout_constraintTop_toBottomOf="@+id/companyRegisterInaugurationDate" />
 
 
 </android.support.constraint.ConstraintLayout>

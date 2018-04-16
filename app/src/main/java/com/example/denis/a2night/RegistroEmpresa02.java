@@ -39,7 +39,6 @@ public class RegistroEmpresa02 extends AppCompatActivity {
         getSupportActionBar().hide();
 
         name = findViewById(R.id.companyRegisterName);
-        description = findViewById(R.id.companyRegisterDescription);
         inaugurationDate = findViewById(R.id.companyRegisterInaugurationDate);
         companyID = findViewById(R.id.companyRegisterPK);
 

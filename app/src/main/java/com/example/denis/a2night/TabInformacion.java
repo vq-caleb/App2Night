@@ -1,14 +1,11 @@
 package com.example.denis.a2night;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +21,9 @@ import java.util.List;
 public class TabInformacion extends Fragment {
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     TextView tipoEmpresa, costoEntrada, codigoVestimenta, estadoHorario, numTelefonos, correoElectronico, paginaFacebook,
-            paginaInstagram, paginaTwitter, horarioLunes, horarioMartes, horarioMiercoles, horarioJueves, horarioViernes,
-            horarioSabado, horarioDomingo;
+            paginaInstagram, paginaTwitter, diaLunes, diaMartes, diaMiercoles, diaJueves, diaViernes,
+            diaSabado, diaDomingo, horaLunesA, horaLunesC, horaMartesA, horaMartesC, horaMiercolesA, horaMiercolesC,
+            horaJuevesA, horaJuevesC, horaViernesA, horaViernesC, horaSabadoA, horaSabadoC, horaDomingoA, horaDomingoC;
     RatingBar estrellas;
     private static final String  TAG = "TabInformacion";
 
@@ -57,13 +55,33 @@ public class TabInformacion extends Fragment {
 
     public void completarInfoHorarioSemanal(){
         List<Horario> temp = this.aGlobal.getEmpresa().getHorarioSemanal();
-        this.horarioLunes.setText(temp.get(0).toString());
-        this.horarioMartes.setText(temp.get(1).toString());
-        this.horarioMiercoles.setText(temp.get(2).toString());
-        this.horarioJueves.setText(temp.get(3).toString());
-        this.horarioViernes.setText(temp.get(4).toString());
-        this.horarioSabado.setText(temp.get(5).toString());
-        this.horarioDomingo.setText(temp.get(6).toString());
+        this.diaLunes.setText(temp.get(0).getDia()+":");
+        this.horaLunesA.setText(temp.get(0).getHoraAbierto());
+        this.horaLunesC.setText(temp.get(0).getHoraCierre());
+
+        this.diaMartes.setText(temp.get(1).getDia()+":");
+        this.horaMartesA.setText(temp.get(1).getHoraAbierto());
+        this.horaMartesC.setText(temp.get(1).getHoraCierre());
+
+        this.diaMiercoles.setText(temp.get(2).getDia()+":      ");
+        this.horaMiercolesA.setText(temp.get(2).getHoraAbierto());
+        this.horaMiercolesC.setText(temp.get(2).getHoraCierre());
+
+        this.diaJueves.setText(temp.get(3).getDia()+":");
+        this.horaJuevesA.setText(temp.get(3).getHoraAbierto());
+        this.horaJuevesC.setText(temp.get(3).getHoraCierre());
+
+        this.diaViernes.setText(temp.get(4).getDia()+":");
+        this.horaViernesA.setText(temp.get(4).getHoraAbierto());
+        this.horaViernesC.setText(temp.get(4).getHoraCierre());
+
+        this.diaSabado.setText(temp.get(5).getDia()+":");
+        this.horaSabadoA.setText(temp.get(5).getHoraAbierto());
+        this.horaSabadoC.setText(temp.get(5).getHoraCierre());
+
+        this.diaDomingo.setText(temp.get(6).getDia()+":");
+        this.horaDomingoA.setText(temp.get(6).getHoraAbierto());
+        this.horaDomingoC.setText(temp.get(6).getHoraCierre());
     }
 
     public void alambrarVariables(View view){
@@ -76,13 +94,28 @@ public class TabInformacion extends Fragment {
         this.paginaFacebook = (TextView) view.findViewById(R.id.paginaFacebook);
         this.paginaInstagram = (TextView) view.findViewById(R.id.paginaInstagram);
         this.paginaTwitter = (TextView) view.findViewById(R.id.paginaTwitter);
-        this.horarioLunes = (TextView) view.findViewById(R.id.horarioLunes);
-        this.horarioMartes = (TextView) view.findViewById(R.id.horarioMartes);
-        this.horarioMiercoles = (TextView) view.findViewById(R.id.horarioMiercoles);
-        this.horarioJueves = (TextView) view.findViewById(R.id.horarioJueves);
-        this.horarioViernes = (TextView) view.findViewById(R.id.horarioViernes);
-        this.horarioSabado = (TextView) view.findViewById(R.id.horarioSabado);
-        this.horarioDomingo = (TextView) view.findViewById(R.id.horarioDomingo);
+        this.diaLunes = (TextView) view.findViewById(R.id.diaLunes);
+        this.horaLunesA = (TextView) view.findViewById(R.id.horaLunesA);
+        this.horaLunesC = (TextView) view.findViewById(R.id.horaLunesC);
+        this.diaMartes = (TextView) view.findViewById(R.id.diaMartes);
+        this.horaMartesA = (TextView) view.findViewById(R.id.horaMartesA);
+        this.horaMartesC = (TextView) view.findViewById(R.id.horaMartesC);
+        this.diaMiercoles = (TextView) view.findViewById(R.id.diaMiercoles);
+        this.horaMiercolesA = (TextView) view.findViewById(R.id.horaMiercolesA);
+        this.horaMiercolesC = (TextView) view.findViewById(R.id.horaMiercolesC);
+        this.diaJueves = (TextView) view.findViewById(R.id.diaJueves);
+        this.horaJuevesA = (TextView) view.findViewById(R.id.horaJuevesA);
+        this.horaJuevesC = (TextView) view.findViewById(R.id.horaJuevesC);
+        this.diaViernes = (TextView) view.findViewById(R.id.diaViernes);
+        this.horaViernesA = (TextView) view.findViewById(R.id.horaViernesA);
+        this.horaViernesC = (TextView) view.findViewById(R.id.horaViernesC);
+        this.diaSabado = (TextView) view.findViewById(R.id.diaSabado);
+        this.horaSabadoA = (TextView) view.findViewById(R.id.horaSabadoA);
+        this.horaSabadoC = (TextView) view.findViewById(R.id.horaSabadoC);
+        this.diaDomingo = (TextView) view.findViewById(R.id.diaDomingo);
+        this.horaDomingoA = (TextView) view.findViewById(R.id.horaDomingoA);
+        this.horaDomingoC = (TextView) view.findViewById(R.id.horaDomingoC);
+
         this.estrellas = (RatingBar) view.findViewById(R.id.calificacion);
     }
 
