@@ -145,7 +145,9 @@ public class Login extends AppCompatActivity {
                 switch (v.getId()) {
 
                     case R.id.btnIniciar:
-                        iniciarSesion();
+                        //iniciarSesion();
+                        Intent intento1 = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intento1);
                         break;
 
                     default:break; }
