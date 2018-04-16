@@ -25,7 +25,7 @@ public class TabPost extends Fragment {
             R.drawable.frat,
             R.drawable.frat,
             R.drawable.frat,
-            R.drawable.fratportada
+            R.drawable.frat
     };
 
     List<Integer> lstSource = new ArrayList<>();
