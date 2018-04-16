@@ -5,12 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Registro01 extends AppCompatActivity {
+public class RegistroEmpresa01 extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
@@ -29,21 +27,18 @@ public class Registro01 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro01);
+        setContentView(R.layout.activity_registro_empresa);
         getSupportActionBar().hide();
 
-        email = (EditText) findViewById(R.id.registerEmail);
-        password = (EditText) findViewById(R.id.registerPassword);
+        email = (EditText) findViewById(R.id.companyRegisterEmail);
+        password = (EditText) findViewById(R.id.companyRegisterPassword);
 
         // Inicializando autenticación
         mAuth = FirebaseAuth.getInstance();
 
         //Eventos
-        OnclickButton(R.id.btnSiguiente);
-        OnclickImageView(R.id.imgAtras02);
-
-        OnclickDelTextView(R.id.textView12);
-
+        OnclickButton(R.id.btnCompanyRegister1);
+        OnclickImageView(R.id.imgCompanyRegisterBack);
     }
 
     //-------------------------------- Funcionalidad -----------------------------------------------------------
@@ -75,18 +70,18 @@ public class Registro01 extends AppCompatActivity {
         String password = this.password.getText().toString();
 
         if (validateForm())
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                           FirebaseUser user = mAuth.getCurrentUser();
-                           registro02();
-                        } else {
-                            Mensaje("Verifique correo y contraseña");
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                registro02();
+                            } else {
+                                Mensaje("Verifique correo y contraseña");
+                            }
                         }
-                    }
-                });
+                    });
         else
             Mensaje("Complete los espacios en blanco");
     }
@@ -95,12 +90,12 @@ public class Registro01 extends AppCompatActivity {
     // ------------------------------- Paso de Actividades -----------------------------------------------------
 
     public void atras(){
-        Intent intento2 = new Intent(getApplicationContext(), Principal.class);
+        Intent intento2 = new Intent(getApplicationContext(), Registro01.class);
         startActivity(intento2);
     }
 
     public void registro02() {
-        Intent intento = new Intent(getApplicationContext(), Registro02.class);
+        Intent intento = new Intent(getApplicationContext(), RegistroEmpresa02.class);
         startActivity(intento);
     }
 
@@ -120,7 +115,7 @@ public class Registro01 extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
 
-                    case R.id.btnSiguiente:
+                    case R.id.btnCompanyRegister1:
                         registrar();
                         break;
 
@@ -138,31 +133,14 @@ public class Registro01 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                    case R.id.imgAtras02:
+                    case R.id.imgCompanyRegisterBack:
                         atras();
-                      break;
+                        break;
 
                     default:break;
                 }
             }
         });
     }// fin de OnclickIV
-
-    public void OnclickDelTextView(int ref) {
-        View view =findViewById(ref);
-        TextView miTextView = (TextView) view;
-        miTextView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.textView12:
-                        Intent intento = new Intent(getApplicationContext(), RegistroEmpresa01.class);
-                        startActivity(intento);
-                        break;
-
-                    default:break; }
-            }
-        });
-    }// fin de OnclickTV
 
 }

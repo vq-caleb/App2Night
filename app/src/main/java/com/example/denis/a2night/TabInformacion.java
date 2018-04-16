@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Horario;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,6 +59,7 @@ public class TabInformacion extends Fragment {
 
     public void completarInfoHorarioSemanal(){
         List<Horario> temp = this.aGlobal.getEmpresa().getHorarioSemanal();
+        verificarEstadoHorario();
         this.horarioLunes.setText(temp.get(0).toString());
         this.horarioMartes.setText(temp.get(1).toString());
         this.horarioMiercoles.setText(temp.get(2).toString());
@@ -64,6 +67,28 @@ public class TabInformacion extends Fragment {
         this.horarioViernes.setText(temp.get(4).toString());
         this.horarioSabado.setText(temp.get(5).toString());
         this.horarioDomingo.setText(temp.get(6).toString());
+    }
+
+    public void verificarEstadoHorario(){
+        Date currentTime = Calendar.getInstance().getTime();
+        List<Horario> horario = aGlobal.getEmpresa().getHorarioSemanal();
+        switch (currentTime.getDay()){
+            case 0: cambiarEstadoHorario(horario.get(6).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
+            case 1: cambiarEstadoHorario(horario.get(0).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
+            case 2: cambiarEstadoHorario(horario.get(1).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
+            case 3: cambiarEstadoHorario(horario.get(2).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
+            case 4: cambiarEstadoHorario(horario.get(3).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
+            case 5: cambiarEstadoHorario(horario.get(4).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
+            case 6: cambiarEstadoHorario(horario.get(5).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
+        }
+    }
+
+    public void cambiarEstadoHorario(boolean estado){
+        if (estado){
+            this.estadoHorario.setText("ABIERTO");
+        } else {
+            this.estadoHorario.setText("ABIERTO");
+        }
     }
 
     public void alambrarVariables(View view){

@@ -18,31 +18,32 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-// import entidades
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class Registro02 extends AppCompatActivity {
+public class RegistroEmpresa02 extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText name;
-    private EditText lastName;
-    private EditText birthday;
+    private EditText description;
+    private EditText inaugurationDate;
+    private EditText companyID;
     private DatabaseReference mDatabase;
-    private String gender;
+    private String companyType;
+    Map<String,String> empresa = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro02);
+        setContentView(R.layout.activity_registro_empresa02);
         getSupportActionBar().hide();
 
-        name = findViewById(R.id.registerName);
-        lastName = findViewById(R.id.registerLastName);
-        birthday = findViewById(R.id.registerBirthday);
+        name = findViewById(R.id.companyRegisterName);
+        description = findViewById(R.id.companyRegisterDescription);
+        inaugurationDate = findViewById(R.id.companyRegisterInaugurationDate);
+        companyID = findViewById(R.id.companyRegisterPK);
 
-        gender = "";
+        companyType = "";
         // Inicializando autenticación
         mAuth = FirebaseAuth.getInstance();
 
@@ -50,12 +51,12 @@ public class Registro02 extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Eventos
-        OnclickButton(R.id.btnRegistrarse);
+        OnclickButton(R.id.btnCompanyRegister2);
         OnclickImageView(R.id.imgAtras02);
 
 
-        OnclickRadioButton(R.id.radioButton);
-        OnclickRadioButton(R.id.radioButton2);
+        OnclickRadioButton(R.id.radioButton3);
+        OnclickRadioButton(R.id.radioButton4);
 
         String encodeUser = EncodeString(mAuth.getCurrentUser().toString());
 
@@ -74,28 +75,29 @@ public class Registro02 extends AppCompatActivity {
             this.name.setError(null);
         }
 
-        String lastName = this.lastName.getText().toString();
-        if (TextUtils.isEmpty(lastName)) {
-            this.lastName.setError("Requerido");
+        String description = this.description.getText().toString();
+        if (TextUtils.isEmpty(description)) {
+            this.description.setError("Requerido");
             valid = false;
         } else {
-            this.lastName.setError(null);
+            this.description.setError(null);
         }
 
-        String birthday = this.birthday.getText().toString();
-        if (TextUtils.isEmpty(birthday)) {
-            this.birthday.setError("Requerido");
+        String inaugurationDate = this.inaugurationDate.getText().toString();
+        if (TextUtils.isEmpty(inaugurationDate)) {
+            this.inaugurationDate.setError("Requerido");
             valid = false;
         } else {
-            this.birthday.setError(null);
+            this.inaugurationDate.setError(null);
         }
 
-        RadioButton rbtn = findViewById(R.id.radioButton2);
-        if (gender == "") {
+
+        RadioButton rbtn = findViewById(R.id.radioButton3);
+        if (companyType == "") {
             rbtn.setError("Requerido");
             valid = false;
         } else {
-           rbtn.setError(null);
+            rbtn.setError(null);
         }
 
         return valid;
@@ -113,31 +115,52 @@ public class Registro02 extends AppCompatActivity {
 
         if(validateForm()) {
             String name = this.name.getText().toString();
-            String lastName = this.lastName.getText().toString();
-            String birthday = this.birthday.getText().toString();
+            String lastName = this.name.getText().toString();
+            String birthday = this.description.getText().toString();
+            final String companyID = this.companyID.getText().toString();
+
+            empresa.put("cantidadAsistentes","0");
+            empresa.put("codigoVestimenta","");
+            empresa.put("correo","");
+            empresa.put("descripcion",lastName);
+            empresa.put("entrada","");
+            empresa.put("etiquetaUbicacion","");
+            empresa.put("fechaInauguracion","");
+            empresa.put("nombre",name);
+            empresa.put("paginaFacebook","");
+            empresa.put("paginaInstagram","");
+            empresa.put("paginaTwitter","");
+            empresa.put("telefono1","");
+            empresa.put("telefono2","");
+            empresa.put("tipoNegocio",companyType);
+            String encodeUser = EncodeString(mAuth.getCurrentUser().toString());
 
             Map<String,String> usuario = new HashMap<>();
-            usuario.put("nombre",name);
-            usuario.put("apellidos",lastName);
-            usuario.put("fechaNacimiento",birthday);
+            usuario.put("bar",companyID);
             usuario.put("confirmado","false");
-            usuario.put("anonimo","false");
-            usuario.put("genero",gender);
-
-            String encodeUser = EncodeString(mAuth.getCurrentUser().toString());
 
 
             mDatabase.child("Usuarios").child(encodeUser).setValue(usuario).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(@NonNull Void T) {
-                    Mensaje("Usuario añadido correctamente");
-                    Intent intento = new Intent(getApplicationContext(), Navegador.class);
-                    startActivity(intento);
+                    mDatabase.child("Bares").child(companyID).setValue(empresa).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(@NonNull Void T) {
+                            Mensaje("Empresa añadida correctamente");
+                            Intent intento = new Intent(getApplicationContext(), Navegador.class);
+                            startActivity(intento);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Mensaje("Empresa existente");
+                        }
+                    });
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Mensaje("Error");
+                    Mensaje("Empresa Existente");
                 }
             });
         }else{
@@ -168,7 +191,7 @@ public class Registro02 extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
 
-                    case R.id.btnRegistrarse:
+                    case R.id.btnCompanyRegister2:
                         registrar();
                         break;
 
@@ -207,12 +230,12 @@ public class Registro02 extends AppCompatActivity {
                 // if(msg.equals("Texto")){Mensaje("Texto en el botón ");};
                 switch (v.getId()) {
 
-                    case R.id.radioButton:
-                        gender = "F";
+                    case R.id.radioButton3:
+                        companyType = "B";
                         break;
 
-                    case R.id.radioButton2:
-                        gender = "M";
+                    case R.id.radioButton4:
+                        companyType = "R";
 
                         break;
                     default:break; }
