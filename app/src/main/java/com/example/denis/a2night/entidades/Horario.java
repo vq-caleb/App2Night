@@ -83,6 +83,27 @@ public class Horario {
         return Integer.parseInt(this.horaCierre.toString().substring(2,4));
     }
 
+    public boolean estaAbierto(int hora, int min){
+        if (estaAbierto) {
+            if (getSoloHoraAbierto() > hora && getSoloHoraCierre() < hora) {
+                return true;
+            } else if (getSoloHoraAbierto() == hora && getSoloMinAbierto() <= min) {
+                if (getSoloHoraCierre() == hora) {
+                    if (getSoloMinCierre() >= min) {
+                        return true;
+                    }
+                } else if (getSoloHoraCierre() < hora) {
+                    return true;
+                }
+            } else if (getSoloHoraCierre() == hora) {
+                if (getSoloMinCierre() >= min) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public String toString(){
         if (estaAbierto){
             return this.dia+": "+this.horaAbierto+" - "+this.horaCierre;
