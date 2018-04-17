@@ -1,6 +1,7 @@
 package com.example.denis.a2night;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -52,6 +53,7 @@ public class TabInformacion extends Fragment {
         this.paginaTwitter.setText(this.aGlobal.getEmpresa().getPaginaTwitter());
         this.estrellas.setRating(this.aGlobal.getEmpresa().getCalificacion());
         completarInfoHorarioSemanal();
+        verificarEstadoHorario();
     }
 
     public void completarInfoHorarioSemanal(){
@@ -90,21 +92,23 @@ public class TabInformacion extends Fragment {
         Date currentTime = Calendar.getInstance().getTime();
         List<Horario> horario = aGlobal.getEmpresa().getHorarioSemanal();
         switch (currentTime.getDay()){
-            case 0: cambiarEstadoHorario(horario.get(6).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
-            case 1: cambiarEstadoHorario(horario.get(0).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
-            case 2: cambiarEstadoHorario(horario.get(1).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
-            case 3: cambiarEstadoHorario(horario.get(2).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
-            case 4: cambiarEstadoHorario(horario.get(3).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
-            case 5: cambiarEstadoHorario(horario.get(4).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
-            case 6: cambiarEstadoHorario(horario.get(5).estaAbierto(currentTime.getHours(),currentTime.getMinutes())); break;
+            case 0: cambiarEstadoHorario(horario.get(6).isEstaAbierto()); break;
+            case 1: cambiarEstadoHorario(horario.get(0).isEstaAbierto()); break;
+            case 2: cambiarEstadoHorario(horario.get(1).isEstaAbierto()); break;
+            case 3: cambiarEstadoHorario(horario.get(2).isEstaAbierto()); break;
+            case 4: cambiarEstadoHorario(horario.get(3).isEstaAbierto()); break;
+            case 5: cambiarEstadoHorario(horario.get(4).isEstaAbierto()); break;
+            case 6: cambiarEstadoHorario(horario.get(5).isEstaAbierto()); break;
         }
     }
 
     public void cambiarEstadoHorario(boolean estado){
         if (estado){
-            this.estadoHorario.setText("ABIERTO");
+            this.estadoHorario.setText("(HOY ESTARÁ ABIERTO)");
+            this.estadoHorario.setTextColor(getResources().getColor(R.color.colorGreenOpen));
         } else {
-            this.estadoHorario.setText("CERRADO");
+            this.estadoHorario.setText("(HOY ESTARÁ CERRADO)");
+            this.estadoHorario.setTextColor(getResources().getColor(R.color.colorRedDark));
         }
     }
 
