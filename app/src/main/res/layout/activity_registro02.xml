@@ -59,12 +59,13 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="56dp"
         android:text="Género"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerLastName" />
+        app:layout_constraintBottom_toTopOf="@+id/rg"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <Button
         android:id="@+id/btnRegistrarse"
@@ -111,13 +112,11 @@
         android:id="@+id/rg"
         android:layout_width="108dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="48dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/registerBirthday"
-        app:layout_constraintVertical_bias="0.589">
+        app:layout_constraintTop_toBottomOf="@+id/registerLastName">
 
         <RadioButton
             android:id="@+id/radioButton"
@@ -157,13 +156,13 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="348dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/border"
         android:backgroundTint="@android:color/background_light"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/registerLastName" />
 
     <TextView
         android:id="@+id/textView2"

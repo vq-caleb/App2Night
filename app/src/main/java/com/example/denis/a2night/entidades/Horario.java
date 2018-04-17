@@ -10,6 +10,13 @@ public class Horario {
     private String dia, horaAbierto, horaCierre;
     private boolean estaAbierto;
 
+    public Horario(){
+        dia = "";
+        horaAbierto = "";
+        horaCierre = "";
+        estaAbierto = false;
+    }
+
     public Horario(String dia, String horaAbierto, String horaCierre) {
         this.dia = dia;
         this.horaAbierto = horaAbierto;
@@ -72,7 +79,7 @@ public class Horario {
     }
 
     public int getSoloMinAbierto(){
-        return Integer.parseInt(this.horaAbierto.toString().substring(2,4));
+        return Integer.parseInt(this.horaAbierto.toString().substring(3,5));
     }
 
     public int getSoloHoraCierre(){
@@ -80,7 +87,28 @@ public class Horario {
     }
 
     public int getSoloMinCierre(){
-        return Integer.parseInt(this.horaCierre.toString().substring(2,4));
+        return Integer.parseInt(this.horaCierre.toString().substring(3,5));
+    }
+
+    public boolean estaAbierto(int hora, int min){
+        if (estaAbierto) {
+            if (getSoloHoraAbierto() > hora && getSoloHoraCierre() < hora) {
+                return true;
+            } else if (getSoloHoraAbierto() == hora && getSoloMinAbierto() <= min) {
+                if (getSoloHoraCierre() == hora) {
+                    if (getSoloMinCierre() >= min) {
+                        return true;
+                    }
+                } else if (getSoloHoraCierre() < hora) {
+                    return true;
+                }
+            } else if (getSoloHoraCierre() == hora) {
+                if (getSoloMinCierre() >= min) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String toString(){

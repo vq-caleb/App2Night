@@ -147,6 +147,8 @@ public class Login extends AppCompatActivity {
 
                     case R.id.btnIniciar:
                         iniciarSesion();
+                        /*Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
+                        startActivity(intento1);*/
                         break;
 
                     default:break; }

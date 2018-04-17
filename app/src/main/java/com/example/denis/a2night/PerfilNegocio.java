@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Empresa;
@@ -20,7 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,11 +55,32 @@ public class PerfilNegocio extends Fragment {
         alambrarVariables(view);
 
         OnclickDelTextView(R.id.info, view);
+        OnclickDelTextView(R.id.publicacion, view);
         OnclickDelTextView(R.id.promo, view);
+        OnclickDelTextView(R.id.evento, view);
 
+        Map<String,Integer> images = new HashMap();
+        images.put("mercaditocr",R.drawable.mercadoescalante);
+        images.put("entrenouscr",R.drawable.entrenous);
+        images.put("saulbistrocr",R.drawable.saulbistro);
+        images.put("aguizotescr",R.drawable.aguizotes);
+        images.put("laconchacr",R.drawable.laconcha);
+        images.put("antikcr",R.drawable.antik);
+        images.put("lacalicr",R.drawable.lacali);
+        images.put("cuartelcr",R.drawable.elcuartel);
+        images.put("einsteincr",R.drawable.einstein);
+        images.put("frathousecr",R.drawable.frat);
+        images.put("xcapecr",R.drawable.xcape);
+        images.put("caccioscr",R.drawable.caccios);
+
+        ImageView imagenPerfil = (ImageView) view.findViewById(R.id.perfil);
+        imagenPerfil.setImageResource(images.get(aGlobal.getIdEmpresaActual()));
+
+        TextView info01 = (TextView) view.findViewById(R.id.publicacion);
+        info01.setTextColor(getResources().getColor(R.color.colorPrimary));
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.contenido, new TabPost()).commit();
-
+        this.aGlobal.setEmpresa(new Empresa());
         this.cargaEmpresa();
         return view;
     }
@@ -155,24 +179,61 @@ public class PerfilNegocio extends Fragment {
     }
 
     public void OnclickDelTextView(int ref, View view) {
+
         View view2 = view.findViewById(ref);
         TextView miTextView = (TextView) view2;
 
-        miTextView.setOnClickListener(new View.OnClickListener(){
+        miTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView info01 = (TextView) getActivity().findViewById(R.id.info);
+                TextView promo01 = (TextView) getActivity().findViewById(R.id.promo);
+                TextView public01 = (TextView) getActivity().findViewById(R.id.publicacion);
+                TextView evento01 = (TextView) getActivity().findViewById(R.id.evento);
                 switch (v.getId()) {
+
                     case R.id.info:
+                        info01.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        promo01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        public01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        evento01.setTextColor(getResources().getColor(R.color.colorAccent));
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.contenido, new TabInformacion()).commit();
                         break;
+
                     case R.id.publicacion:
+                        info01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        promo01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        public01.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        evento01.setTextColor(getResources().getColor(R.color.colorAccent));
                         FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
                         transaction2.replace(R.id.contenido, new TabPost()).commit();
                         break;
-                    default:break;
-                }
-            }
+
+                    case R.id.evento:
+                        info01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        promo01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        public01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        evento01.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        /*FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
+                        transaction2.replace(R.id.contenido, new TabPost()).commit();*/
+                        break;
+
+                    case R.id.promo:
+                        info01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        promo01.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        public01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        evento01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        /*FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
+                        transaction2.replace(R.id.contenido, new TabPost()).commit();*/
+                        break;
+                    default:
+                        break;
+                }// fin de casos
+            }// fin del onclick
         });
-    }
+    }// fin de OnclickDelTextView
+
+    public void Mensaje(String msg){
+        Toast.makeText(getActivity(), msg,Toast.LENGTH_SHORT).show();};
 }

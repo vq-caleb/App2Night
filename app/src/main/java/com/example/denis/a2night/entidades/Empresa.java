@@ -29,7 +29,29 @@ public class Empresa {
     private List<Horario> horarioSemanal;
 
 
-    public Empresa(){}
+    public Empresa(){
+        this.idEmpresa = "";
+        this.nombre = "";
+        this.etiquetaUbicacion = "";
+        this.cantidadAsistentes = 0;
+        this.telefono1 = "";
+        this.telefono2 = "";
+        this.correo = "";
+        this.descripcion = "";
+        this.codigoVestimenta = "";
+        this.entrada = "";
+        this.tipoNegocio = "";
+        this.paginaFacebook = "";
+        this.paginaInstagram = "";
+        this.paginaTwitter = "";
+        Horario h = new Horario();
+        List<Horario> lista = new ArrayList<Horario>();
+        for (int i=0;i<7;i++)
+        lista.add(h);
+        this.horarioSemanal = lista;
+        this.calificaciones.add(new Calificacion(new Usuario("soto.2808@gmail.com","Anthony","Soto",false,false,"28/08/97","M"),4.5f));
+        this.calificaciones.add(new Calificacion(new Usuario("s.calderon3010@gmail.com","Steven","Calderon",false,false,"30/10/96","M"),4.5f));
+    }
 
     // ubicacion googleMaps, listaDeUsuariosSeguidores, imagenPortada, imagenPerfil, horario
 
