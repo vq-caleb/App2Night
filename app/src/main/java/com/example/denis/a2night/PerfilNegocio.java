@@ -2,7 +2,6 @@ package com.example.denis.a2night;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ import java.util.Map;
 
 public class PerfilNegocio extends Fragment {
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
-    TextView nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
+    TextView idEmpresa, nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
     ImageView fotoPerfilEmpresa;
     Empresa empresa;
 
@@ -59,22 +58,39 @@ public class PerfilNegocio extends Fragment {
         OnclickDelTextView(R.id.promo, view);
         OnclickDelTextView(R.id.evento, view);
 
-        Map<String,Integer> images = new HashMap();
-        images.put("mercaditocr",R.drawable.mercadoescalante);
-        images.put("entrenouscr",R.drawable.entrenous);
-        images.put("saulbistrocr",R.drawable.saulbistro);
-        images.put("aguizotescr",R.drawable.aguizotes);
-        images.put("laconchacr",R.drawable.laconcha);
-        images.put("antikcr",R.drawable.antik);
-        images.put("lacalicr",R.drawable.lacali);
-        images.put("cuartelcr",R.drawable.elcuartel);
-        images.put("einsteincr",R.drawable.einstein);
-        images.put("frathousecr",R.drawable.frat);
-        images.put("xcapecr",R.drawable.xcape);
-        images.put("caccioscr",R.drawable.caccios);
+        Map<String,Integer> imagenesPerfil = new HashMap();
+        imagenesPerfil.put("mercaditocr",R.drawable.mercadoescalante);
+        imagenesPerfil.put("entrenouscr",R.drawable.entrenous);
+        imagenesPerfil.put("saulbistrocr",R.drawable.saulbistro);
+        imagenesPerfil.put("aguizotescr",R.drawable.aguizotes);
+        imagenesPerfil.put("laconchacr",R.drawable.laconcha);
+        imagenesPerfil.put("antikcr",R.drawable.antik);
+        imagenesPerfil.put("lacalicr",R.drawable.lacali);
+        imagenesPerfil.put("cuartelcr",R.drawable.elcuartel);
+        imagenesPerfil.put("einsteincr",R.drawable.einstein);
+        imagenesPerfil.put("frathousecr",R.drawable.frat);
+        imagenesPerfil.put("xcapecr",R.drawable.xcape);
+        imagenesPerfil.put("caccioscr",R.drawable.caccios);
+
+        Map<String,Integer> imagenesPortada = new HashMap();
+        imagenesPortada.put("mercaditocr",R.drawable.portadamercadito);
+        imagenesPortada.put("entrenouscr",R.drawable.portadaentre);
+        imagenesPortada.put("saulbistrocr",R.drawable.portadasaul);
+        imagenesPortada.put("aguizotescr",R.drawable.portadaaguizotes);
+        imagenesPortada.put("laconchacr",R.drawable.portadaconcha);
+        imagenesPortada.put("antikcr",R.drawable.portadaantik);
+        imagenesPortada.put("lacalicr",R.drawable.portadalacali);
+        imagenesPortada.put("cuartelcr",R.drawable.portadaelcuartel);
+        imagenesPortada.put("einsteincr",R.drawable.portadaeinstein);
+        imagenesPortada.put("frathousecr",R.drawable.portadafrat);
+        imagenesPortada.put("xcapecr",R.drawable.portadaxcape);
+        imagenesPortada.put("caccioscr",R.drawable.portadacaccios);
 
         ImageView imagenPerfil = (ImageView) view.findViewById(R.id.perfil);
-        imagenPerfil.setImageResource(images.get(aGlobal.getIdEmpresaActual()));
+        imagenPerfil.setImageResource(imagenesPerfil.get(aGlobal.getIdEmpresaActual()));
+
+        ImageView imagenPortada = (ImageView) view.findViewById(R.id.portada);
+        imagenPortada.setImageResource(imagenesPortada.get(aGlobal.getIdEmpresaActual()));
 
         TextView info01 = (TextView) view.findViewById(R.id.publicacion);
         info01.setTextColor(getResources().getColor(R.color.colorPrimary));
@@ -165,6 +181,7 @@ public class PerfilNegocio extends Fragment {
     }
 
     public void completarInformacion(){
+        this.idEmpresa.setText(this.aGlobal.getIdEmpresaActual());
         this.nombreEmpresa.setText(this.aGlobal.getEmpresa().getNombre());
         this.etiquetaUbicacion.setText(this.aGlobal.getEmpresa().getEtiquetaUbicacion());
         this.cantidadSeguidores.setText(this.aGlobal.getEmpresa().getCantidadSeguidoresFormartoK());
@@ -172,6 +189,7 @@ public class PerfilNegocio extends Fragment {
     }
 
     public void alambrarVariables(View view){
+        this.idEmpresa =  (TextView) view.findViewById(R.id.idEmpresa);
         this.nombreEmpresa =  (TextView) view.findViewById(R.id.nombre);
         this.cantidadSeguidores =  (TextView) view.findViewById(R.id.cantidadSeguidores);
         this.cantidadAsistentes =  (TextView) view.findViewById(R.id.cantidadAsistentes);
