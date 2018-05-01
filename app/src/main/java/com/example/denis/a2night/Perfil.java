@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 /**
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
  */
 public class Perfil extends Fragment {
 
+    TextView video;
 
     public Perfil() {
         // Required empty public constructor
@@ -23,7 +26,15 @@ public class Perfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        video = (TextView) view.findViewById(R.id.video);
+        video.setText("https://youtu.be/YtjOaZTiuWY");
+
+
+        return view;
+
     }
+
+
 
 }
