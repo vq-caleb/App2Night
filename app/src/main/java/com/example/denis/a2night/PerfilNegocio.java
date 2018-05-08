@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -143,6 +144,23 @@ public class PerfilNegocio extends Fragment {
         transaction.replace(R.id.contenido, new TabPost()).commit();
         this.aGlobal.setEmpresa(new Empresa());
         this.cargaEmpresa();
+
+
+        final Button btnSeguir = (Button) view.findViewById(R.id.btnSeguir);
+        btnSeguir.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                if (siguiendo){
+                    siguiendo = false;
+                    btnSeguir.setText("Seguir");
+                } else {
+                    siguiendo = true;
+                    btnSeguir.setText("Quitar");
+                }
+
+            }
+        });
+
         return view;
     }
 

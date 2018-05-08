@@ -35,7 +35,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tipoEmpresa" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/imgTelefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -51,7 +51,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:text="- "
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintStart_toEndOf="@+id/imgTelefono"
             app:layout_constraintTop_toBottomOf="@+id/calificacion" />
 
         <ImageView
@@ -61,7 +61,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6"
+            app:layout_constraintTop_toBottomOf="@+id/imgTelefono"
             app:srcCompat="@drawable/ic_email_black_24dp" />
 
         <TextView
@@ -184,14 +184,14 @@
             app:layout_constraintTop_toBottomOf="@+id/paginaInstagram" />
 
         <ImageView
-            android:id="@+id/imageView19"
+            android:id="@+id/iconoMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            app:srcCompat="@drawable/ic_import_contacts_black_24dp"
             app:layout_constraintEnd_toStartOf="@+id/textView48"
-            app:layout_constraintTop_toBottomOf="@+id/correoElectronico" />
+            app:layout_constraintTop_toBottomOf="@+id/correoElectronico"
+            app:srcCompat="@drawable/ic_import_contacts_black_24dp" />
 
         <TextView
             android:id="@+id/textView48"
