@@ -1,6 +1,8 @@
 package com.example.denis.a2night;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -14,10 +16,15 @@ import android.widget.Toast;
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Empresa;
 import com.example.denis.a2night.entidades.Horario;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +40,9 @@ public class PerfilNegocio extends Fragment {
     TextView idEmpresa, nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
     ImageView fotoPerfilEmpresa;
     Empresa empresa;
-
+    FirebaseStorage storage;
+    StorageReference storageRef;
+    ImageView imagenPerfil,imagenPortada;
 
     public PerfilNegocio() {
         // Required empty public constructor
@@ -57,8 +66,8 @@ public class PerfilNegocio extends Fragment {
         OnclickDelTextView(R.id.publicacion, view);
         OnclickDelTextView(R.id.promo, view);
         OnclickDelTextView(R.id.evento, view);
-
-        Map<String,Integer> imagenesPerfil = new HashMap();
+/*
+        final Map<String,Integer> imagenesPerfil = new HashMap();
         imagenesPerfil.put("mercaditocr",R.drawable.mercadoescalante);
         imagenesPerfil.put("entrenouscr",R.drawable.entrenous);
         imagenesPerfil.put("saulbistrocr",R.drawable.saulbistro);
@@ -71,7 +80,7 @@ public class PerfilNegocio extends Fragment {
         imagenesPerfil.put("frathousecr",R.drawable.frat);
         imagenesPerfil.put("xcapecr",R.drawable.xcape);
         imagenesPerfil.put("caccioscr",R.drawable.caccios);
-
+*/
         Map<String,Integer> imagenesPortada = new HashMap();
         imagenesPortada.put("mercaditocr",R.drawable.portadamercadito);
         imagenesPortada.put("entrenouscr",R.drawable.portadaentre);
@@ -86,11 +95,47 @@ public class PerfilNegocio extends Fragment {
         imagenesPortada.put("xcapecr",R.drawable.portadaxcape);
         imagenesPortada.put("caccioscr",R.drawable.portadacaccios);
 
-        ImageView imagenPerfil = (ImageView) view.findViewById(R.id.perfil);
-        imagenPerfil.setImageResource(imagenesPerfil.get(aGlobal.getIdEmpresaActual()));
+        imagenPerfil = (ImageView) view.findViewById(R.id.perfil);
+        imagenPortada = (ImageView) view.findViewById(R.id.portada);
+       /* storage = FirebaseStorage.getInstance();
+        //creates a storage reference
+        storageRef = storage.getReference();*/
 
-        ImageView imagenPortada = (ImageView) view.findViewById(R.id.portada);
-        imagenPortada.setImageResource(imagenesPortada.get(aGlobal.getIdEmpresaActual()));
+        String imgPortada = "portadas/"+aGlobal.getIdEmpresaActual()+".png";
+        FirebaseStorage.getInstance().getReference().child(imgPortada).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(getActivity()).load(uri).into(imagenPortada);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+               // Mensaje("hostiaTio");
+            }
+        });
+
+
+        String imgPerfil = "perfil/"+aGlobal.getIdEmpresaActual()+".png";
+        FirebaseStorage.getInstance().getReference().child(imgPerfil).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(getActivity()).load(uri).into(imagenPerfil);
+                // Mensaje(imagenPerfil.getDrawable().toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+               // Mensaje("hostiaTio");
+            }
+        });
+
+
+
+        //imagenPerfil.setImageResource(imagenesPerfil.get(aGlobal.getIdEmpresaActual()));
+
+
+   //        imagenPortada.setImageResource(imagenesPortada.get(aGlobal.getIdEmpresaActual()));
 
         TextView info01 = (TextView) view.findViewById(R.id.publicacion);
         info01.setTextColor(getResources().getColor(R.color.colorPrimary));

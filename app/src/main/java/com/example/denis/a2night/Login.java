@@ -50,6 +50,16 @@ public class Login extends AppCompatActivity {
 
         // Inicializando autenticación
         mAuth = FirebaseAuth.getInstance();
+        /*
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Mensaje("Habemus login");
+            Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
+            startActivity(intento1);
+        } else {
+            Mensaje("Hostia chaval inicia sesión");
+        }*/
+
         OnclickDelButton(R.id.btnIniciar);
         OnclickImageView(R.id.imgAtrasBuscar);
 
@@ -89,7 +99,8 @@ public class Login extends AppCompatActivity {
                             Mensaje("Inicio de sesión corrrecto");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
+                            //Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
+                            Intent intento1 = new Intent(getApplicationContext(), SubirImagenes.class);
                             startActivity(intento1);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -146,7 +157,9 @@ public class Login extends AppCompatActivity {
                 switch (v.getId()) {
 
                     case R.id.btnIniciar:
-                        iniciarSesion();
+                        //iniciarSesion();
+                        Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
+                        startActivity(intento1);
                         /*Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
                         startActivity(intento1);*/
                         break;
