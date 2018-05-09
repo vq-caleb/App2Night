@@ -81,7 +81,7 @@ public class PerfilNegocio extends Fragment {
         imagenesPerfil.put("xcapecr",R.drawable.xcape);
         imagenesPerfil.put("caccioscr",R.drawable.caccios);
 */
-        Map<String,Integer> imagenesPortada = new HashMap();
+    /*    Map<String,Integer> imagenesPortada = new HashMap();
         imagenesPortada.put("mercaditocr",R.drawable.portadamercadito);
         imagenesPortada.put("entrenouscr",R.drawable.portadaentre);
         imagenesPortada.put("saulbistrocr",R.drawable.portadasaul);
@@ -94,7 +94,7 @@ public class PerfilNegocio extends Fragment {
         imagenesPortada.put("frathousecr",R.drawable.portadafrat);
         imagenesPortada.put("xcapecr",R.drawable.portadaxcape);
         imagenesPortada.put("caccioscr",R.drawable.portadacaccios);
-
+*/
         imagenPerfil = (ImageView) view.findViewById(R.id.perfil);
         imagenPortada = (ImageView) view.findViewById(R.id.portada);
        /* storage = FirebaseStorage.getInstance();

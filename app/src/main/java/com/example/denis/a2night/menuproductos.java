@@ -1,7 +1,11 @@
 package com.example.denis.a2night;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,10 +22,14 @@ import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Empresa;
 import com.example.denis.a2night.entidades.Horario;
 import com.example.denis.a2night.entidades.Producto;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +40,13 @@ import java.util.List;
  */
 public class menuproductos extends Fragment {
     View view;
+    ImageView imageView;
+    String nombre, precio;
+    ArrayList<String> nombres = new ArrayList();
+    ArrayList<String> precios = new ArrayList();
+    ArrayList<String> uris = new ArrayList();
+    int cont = 0;
+
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     public menuproductos() {
         // Required empty public constructor
@@ -56,12 +71,35 @@ public class menuproductos extends Fragment {
                 public void onDataChange(DataSnapshot dataSnapshot)
                {
                    for (DataSnapshot child : dataSnapshot.getChildren()) {
-                       String nombre = child.child("nombre").getValue().toString();
-                       String precio = child.child("precio").getValue().toString();
-                       misObjetos.add(new Producto(nombre, precio, R.drawable.producto));
+                       Mensaje(""+nombres.size());
+                       nombres.add(child.child("nombre").getValue().toString());
+                       //Mensaje(nombres.get(nombres.size()));
+                       precios.add(child.child("precio").getValue().toString());
+                       //Mensaje(nombres.get(nombres.size()));
+                       String img = "menus/"+aGlobal.getIdEmpresaActual()+"/"+nombres.get(nombres.size()-1)+".jpg";
+                       uris.add(img);
+                       final long ONE_MEGABYTE = 1024 * 1024;
+                       Mensaje(uris.get(cont));
+                       FirebaseStorage.getInstance().getReference().child(uris.get(cont)).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                           @Override
+                           public void onSuccess(byte[] bytes) {
+                               cont++;
+                               Mensaje(""+cont);
+                               misObjetos.add(new Producto(nombres.get(cont-1), precios.get(cont-1),bytes));
+                               if(cont ==3){
+                                   LlenarListView();
+                                   RegistrarClicks();
+                               }
+                           }
+                       }).addOnFailureListener(new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull Exception exception) {
+                               Mensaje("te has jodido");
+                           }
+                       });
+
                    }
-                   LlenarListView();
-                   RegistrarClicks();
+
                }
                @Override
                public void onCancelled(DatabaseError databaseError) {
@@ -79,6 +117,7 @@ public class menuproductos extends Fragment {
         misObjetos.add(new Producto("A7-01", "A7-02", R.drawable.producto));*/
     }
     private void LlenarListView() {
+        Mensaje("llenando");
         ArrayAdapter<Producto> adapter = new MyListAdapter();
         ListView list = (ListView) view.findViewById(R.id.menuProductos);
         list.setAdapter(adapter);
@@ -107,13 +146,28 @@ public class menuproductos extends Fragment {
             }
             Producto ObjetoActual = misObjetos.get(position);
             // Fill the view
-            ImageView imageView = (ImageView)  itemView.findViewById(R.id.imgProducto);
-            imageView.setImageResource(ObjetoActual.getNumDibujo());
+            imageView = (ImageView)  itemView.findViewById(R.id.imgProducto);
+           /* FirebaseStorage.getInstance().getReference().child(ObjetoActual.getImagen()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Picasso.with(getActivity()).load(uri).into(imageView);
+                    Mensaje(imageView.toString());
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+
+                }
+            });*/
             TextView elatributo01 = (TextView) itemView.findViewById(R.id.nombreProducto);
             elatributo01.setText(ObjetoActual.getAtributo01());
             TextView elatributo02 = (TextView) itemView.findViewById(R.id.precioProducto);
             elatributo02.setText("" + ObjetoActual.getAtributo02());
+            Bitmap decodeByte = BitmapFactory.decodeByteArray(ObjetoActual.getImagen2(),0,ObjetoActual.getImagen2().length);
+            imageView.setImageBitmap(decodeByte);
             return itemView;
+
         }
     }
 
