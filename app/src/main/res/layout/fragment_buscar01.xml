@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.denis.a2night.Buscar">
+    tools:context="com.example.denis.a2night.Buscar01">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,22 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editTextbuscar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-
-            android:background="@android:color/background_light"
-            android:inputType="textPersonName"
-            android:text=" Buscar"
-            android:textColor="@android:color/darker_gray"
-            app:layout_constraintBottom_toTopOf="@+id/scrollV01"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/irBusqueda"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@color/colorAccent"
+            android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_search_black_24dp" />
+
+        <TextView
+            android:id="@+id/irBusqueda2"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@color/colorAccent"
+            android:paddingLeft="8dp"
+            android:paddingTop="14dp"
+            android:text="Buscar"
+            android:textColor="#8d8d8d"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/irBusqueda"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
@@ -35,7 +41,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="56dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -83,6 +89,138 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Acerca de..."
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView3" />
+
+                <LinearLayout
+                    android:id="@+id/linear01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/evento"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@android:color/holo_purple"
+                            android:text="Eventos"
+                            android:textColor="@android:color/background_light"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/sanjose"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:text="San José"
+                            android:textColor="@android:color/background_light"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/alajuela"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@android:color/holo_red_dark"
+                            android:text="Alajuela"
+                            android:textColor="@android:color/background_light"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/heredia"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@android:color/holo_orange_light"
+                            android:text="Heredia"
+                            android:textColor="@android:color/background_light"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/guanacaste"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@android:color/holo_green_dark"
+                            android:text="Guanacaste"
+                            android:textColor="@android:color/background_light"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/limon"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@android:color/holo_green_light"
+                            android:text="Limón"
+                            android:textColor="@android:color/background_light"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/cartago"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@android:color/holo_blue_light"
+                            android:text="Cartago"
+                            android:textColor="@android:color/background_light"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/puntarenas"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@android:color/holo_orange_dark"
+                            android:text="Puntarenas"
+                            android:textColor="@android:color/background_light"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView3"

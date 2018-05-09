@@ -57,7 +57,7 @@ public class PerfilNegocio extends Fragment {
             @Override
             public void onClick(View v){
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new Buscar()).commit();
+                transaction.replace(R.id.content, new Buscar01()).commit();
             }
         });
         alambrarVariables(view);

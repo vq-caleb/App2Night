@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
@@ -16,10 +18,10 @@ import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Buscar extends Fragment {
+public class Buscar01 extends Fragment {
 
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
-    public Buscar() {
+    public Buscar01() {
         // Required empty public constructor
 
     }
@@ -27,7 +29,7 @@ public class Buscar extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_buscar, container, false);
+        View view = inflater.inflate(R.layout.fragment_buscar01, container, false);
 
 
         ImageView MiImageView = (ImageView) view.findViewById(R.id.entrenouscr);
@@ -42,6 +44,9 @@ public class Buscar extends Fragment {
         ImageView MiImageView10 = (ImageView) view.findViewById(R.id.frathousecr);
         ImageView MiImageView11 = (ImageView) view.findViewById(R.id.caccioscr);
         ImageView MiImageView12 = (ImageView) view.findViewById(R.id.xcapecr);
+        ImageView MiImageView13 = (ImageView) view.findViewById(R.id.irBusqueda);
+        TextView textView = (TextView) view.findViewById(R.id.irBusqueda2);
+        Button button = (Button) view.findViewById(R.id.sanjose);
 
         MiImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +165,30 @@ public class Buscar extends Fragment {
                 //Fragment perfilNegocio = new PerfilNegocio();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content, new PerfilNegocio()).commit();
+            }
+        });
+
+        MiImageView13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new Buscar02()).commit();
+            }
+        });
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new Buscar02()).commit();
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new BuscarCategoria()).commit();
             }
         });
         return view;
