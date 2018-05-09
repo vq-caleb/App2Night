@@ -14,8 +14,8 @@ import android.widget.TextView;
  * A simple {@link Fragment} subclass.
  */
 public class Perfil extends Fragment {
-
-    TextView video;
+/*
+    //TextView video;
 
     public Perfil() {
         // Required empty public constructor
@@ -26,14 +26,14 @@ public class Perfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        /*View view = inflater.inflate(R.layout.fragment_perfil, container, false);
         video = (TextView) view.findViewById(R.id.video);
         video.setText("https://youtu.be/YtjOaZTiuWY");
 
 
         return view;
 
-    }
+    }*/
 
 
 

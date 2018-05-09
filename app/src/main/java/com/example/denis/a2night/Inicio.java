@@ -16,6 +16,11 @@ import android.widget.Toast;
 import com.example.denis.a2night.Adapter.MyAdapter;
 import com.example.denis.a2night.Interface.ILoadMore;
 import com.example.denis.a2night.Model.Item;
+import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +34,9 @@ public class Inicio extends Fragment {
 
     List<Item> items = new ArrayList<>();
     MyAdapter adapter;
-
+    FirebaseDatabase db;
+    boolean flag = true;
+    AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     public Inicio() {
 
     }
@@ -39,17 +46,51 @@ public class Inicio extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_inicio, container, false);
-        random10Data();
+        //random10Data();
+        db = FirebaseDatabase.getInstance();
+        db.getReference("Publicaciones").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                aGlobal.setTotalPublicaciones(Integer.parseInt(""+dataSnapshot.getChildrenCount()));
+                Mensaje(""+aGlobal.getTotalPublicaciones());
+                random10Data();
+                if(items.size() >= aGlobal.getTotalPublicaciones())
+                    flag = false;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new MyAdapter(recyclerView, getActivity(), items);
         recyclerView.setAdapter(adapter);
 
+
+       /* db.getReference("Publicaciones").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                aGlobal.setTotalPublicaciones(Integer.parseInt(""+dataSnapshot.getChildrenCount()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+
+
+
         adapter.setLoadMore(new ILoadMore(){
             @Override
             public void onLoadMore() {
-                if(items.size() <= 40){
+                if(flag){
                     items.add(null);
                     adapter.notifyItemInserted(items.size()-1);
                     new Handler().postDelayed(new Runnable() {
@@ -58,12 +99,14 @@ public class Inicio extends Fragment {
                             items.remove(items.size()-1);
                             adapter.notifyItemRemoved(items.size());
 
-                            int index = items.size();
-                            int end = index+10;
-                            for(int i = index; i < end; i++){
-                                String name = UUID.randomUUID().toString();
-                                Item item = new Item(name, name.length());
-                                items.add(item);
+                            for(int i = 0; i < 5; i++){
+                                if(aGlobal.getUltimaPublicacion()<aGlobal.getTotalPublicaciones()) {
+                                    String name = UUID.randomUUID().toString();
+                                    Item item = new Item(name, aGlobal.getUltimaPublicacion());
+                                    aGlobal.setUltimaPublicacion(aGlobal.getUltimaPublicacion()+1);
+                                    items.add(item);
+                                    Mensaje(aGlobal.getTotalPublicaciones()+"");
+                                }
                             }
                             adapter.notifyDataSetChanged();
                             adapter.setLoaded();
@@ -75,15 +118,23 @@ public class Inicio extends Fragment {
             }
         });
 
-    return view;
+
+        return view;
+
+
     }
 
     private void random10Data() {
-        for(int i = 0; i < 10; i++){
+
+        Mensaje("invocando");
+        for(int i = 0; i < 5; i++){
             String name = UUID.randomUUID().toString();
             Item item = new Item(name, name.length());
             items.add(item);
         }
     }
+
+    public void Mensaje(String msg){
+        Toast.makeText(getActivity(), msg,Toast.LENGTH_SHORT).show();};
 
 }

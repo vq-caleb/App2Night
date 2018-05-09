@@ -29,6 +29,8 @@ import java.util.Map;
 public class AlmacenamientoGlobal {
     private Empresa empresa ;
     private String idEmpresaActual;
+    private int ultimaPublicacion = 0;
+    private int totalPublicaciones = 0;
     private static AlmacenamientoGlobal instance = null;
 
     protected AlmacenamientoGlobal() {
@@ -50,4 +52,14 @@ public class AlmacenamientoGlobal {
     public String getIdEmpresaActual() {return idEmpresaActual;}
 
     public void setIdEmpresaActual(String idEmpresaActual) {this.idEmpresaActual = idEmpresaActual;}
+
+    public int getUltimaPublicacion() {return ultimaPublicacion;}
+
+    public void setUltimaPublicacion(int ultimaPublicacion) {this.ultimaPublicacion = ultimaPublicacion;}
+
+    public int getTotalPublicaciones() {return totalPublicaciones;}
+
+    public void setTotalPublicaciones(int totalPublicaciones) {this.totalPublicaciones = totalPublicaciones;}
+
+    public static void setInstance(AlmacenamientoGlobal instance) {AlmacenamientoGlobal.instance = instance;}
 }
