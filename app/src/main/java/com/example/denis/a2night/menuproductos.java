@@ -24,6 +24,7 @@ import com.example.denis.a2night.entidades.Horario;
 import com.example.denis.a2night.entidades.Producto;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -62,10 +63,11 @@ public class menuproductos extends Fragment {
         return view;
     }
 
+
     private List<Producto> misObjetos = new ArrayList<Producto>();
     private void LlenarListaObjetos() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual())
+       db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual())
             .addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot)
@@ -78,25 +80,6 @@ public class menuproductos extends Fragment {
                        //Mensaje(nombres.get(nombres.size()));
                        String img = "menus/"+aGlobal.getIdEmpresaActual()+"/"+nombres.get(nombres.size()-1)+".jpg";
                        uris.add(img);
-                       final long ONE_MEGABYTE = 1024 * 1024;
-                       Mensaje(uris.get(cont));
-                       FirebaseStorage.getInstance().getReference().child(uris.get(cont)).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                           @Override
-                           public void onSuccess(byte[] bytes) {
-                               cont++;
-                               Mensaje(""+cont);
-                               misObjetos.add(new Producto(nombres.get(cont-1), precios.get(cont-1),bytes));
-                               if(cont ==3){
-                                   LlenarListView();
-                                   RegistrarClicks();
-                               }
-                           }
-                       }).addOnFailureListener(new OnFailureListener() {
-                           @Override
-                           public void onFailure(@NonNull Exception exception) {
-                               Mensaje("te has jodido");
-                           }
-                       });
 
                    }
 

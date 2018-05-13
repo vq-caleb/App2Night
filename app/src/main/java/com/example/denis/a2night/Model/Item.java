@@ -1,5 +1,7 @@
 package com.example.denis.a2night.Model;
 
+import com.bumptech.glide.request.target.ImageViewTarget;
+
 /**
  * Created by Minor on 15/04/2018.
  */
@@ -7,6 +9,7 @@ package com.example.denis.a2night.Model;
 public class Item {
     private String name;
     private int length;
+    //private ImageViewTarget
 
     public Item(String name, int length) {
         this.name = name;
