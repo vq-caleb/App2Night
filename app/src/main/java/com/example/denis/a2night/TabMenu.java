@@ -3,7 +3,6 @@ package com.example.denis.a2night;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -19,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
-import com.example.denis.a2night.entidades.Empresa;
-import com.example.denis.a2night.entidades.Horario;
 import com.example.denis.a2night.entidades.Producto;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +35,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class menuproductos extends Fragment {
+public class TabMenu extends Fragment {
     View view;
     ImageView imageView;
     String nombre, precio;
@@ -49,7 +45,7 @@ public class menuproductos extends Fragment {
     int cont = 0;
 
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
-    public menuproductos() {
+    public TabMenu() {
         // Required empty public constructor
     }
 
@@ -58,7 +54,7 @@ public class menuproductos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_menuproductos, container, false);
+        view = inflater.inflate(R.layout.fragment_tab_menu, container, false);
         LlenarListaObjetos();
         return view;
     }

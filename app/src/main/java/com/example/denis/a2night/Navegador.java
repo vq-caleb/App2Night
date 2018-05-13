@@ -1,6 +1,5 @@
 package com.example.denis.a2night;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class Navegador extends AppCompatActivity {
 
@@ -24,7 +22,7 @@ public class Navegador extends AppCompatActivity {
                     transaction.replace(R.id.content, new Inicio()).commit();
                     return true;
                 case R.id.navigation_buscar:
-                    transaction.replace(R.id.content, new Buscar()).commit();
+                    transaction.replace(R.id.content, new Buscar01()).commit();
                     return true;
                 case R.id.navigation_perfil:
                     transaction.replace(R.id.content, new Perfil()).commit();
