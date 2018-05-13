@@ -63,9 +63,8 @@ public class PerfilNegocio extends Fragment {
 
 
         OnclickDelTextView(R.id.info, view);
-        OnclickDelTextView(R.id.publicacion, view);
-        OnclickDelTextView(R.id.promo, view);
-        OnclickDelTextView(R.id.evento, view);
+        OnclickDelTextView(R.id.publi, view);
+        OnclickDelTextView(R.id.productos, view);
 
         imagenPerfil = (ImageView) view.findViewById(R.id.perfil);
         imagenPortada = (ImageView) view.findViewById(R.id.portada);
@@ -95,8 +94,12 @@ public class PerfilNegocio extends Fragment {
             }
         });
 
-        TextView info01 = (TextView) view.findViewById(R.id.publicacion);
-        info01.setTextColor(getResources().getColor(R.color.colorPrimary));
+        TextView publi = (TextView) view.findViewById(R.id.publi);
+        TextView info = (TextView) view.findViewById(R.id.info);
+        TextView productos = (TextView) view.findViewById(R.id.productos);
+        publi.setTextColor(getResources().getColor(R.color.colorPrimary));
+        info.setTextColor(getResources().getColor(R.color.colorGray));
+        productos.setTextColor(getResources().getColor(R.color.colorGray));
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.contenido, new TabPost()).commit();
@@ -128,44 +131,31 @@ public class PerfilNegocio extends Fragment {
             @Override
             public void onClick(View v) {
                 TextView info01 = (TextView) getActivity().findViewById(R.id.info);
-                TextView promo01 = (TextView) getActivity().findViewById(R.id.promo);
-                TextView public01 = (TextView) getActivity().findViewById(R.id.publicacion);
-                TextView evento01 = (TextView) getActivity().findViewById(R.id.evento);
+                TextView public01 = (TextView) getActivity().findViewById(R.id.publi);
+                TextView product01 = (TextView) getActivity().findViewById(R.id.productos);
                 switch (v.getId()) {
                     case R.id.info:
                         info01.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        promo01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        public01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        evento01.setTextColor(getResources().getColor(R.color.colorAccent));
+                        product01.setTextColor(getResources().getColor(R.color.colorGray));
+                        public01.setTextColor(getResources().getColor(R.color.colorGray));
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.contenido, new TabInformacion()).commit();
                         break;
 
-                    case R.id.publicacion:
-                        info01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        promo01.setTextColor(getResources().getColor(R.color.colorAccent));
+                    case R.id.publi:
+                        info01.setTextColor(getResources().getColor(R.color.colorGray));
+                        product01.setTextColor(getResources().getColor(R.color.colorGray));
                         public01.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        evento01.setTextColor(getResources().getColor(R.color.colorAccent));
                         FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
                         transaction2.replace(R.id.contenido, new TabPost()).commit();
                         break;
 
-                    case R.id.evento:
-                        info01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        promo01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        public01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        evento01.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        /*FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
-                        transaction2.replace(R.id.contenido, new TabPost()).commit();*/
-                        break;
-
-                    case R.id.promo:
-                        info01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        promo01.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        public01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        evento01.setTextColor(getResources().getColor(R.color.colorAccent));
-                        /*FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
-                        transaction2.replace(R.id.contenido, new TabPost()).commit();*/
+                    case R.id.productos:
+                        info01.setTextColor(getResources().getColor(R.color.colorGray));
+                        public01.setTextColor(getResources().getColor(R.color.colorGray));
+                        product01.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        FragmentTransaction transaction3 = getFragmentManager().beginTransaction();
+                        transaction3.replace(R.id.contenido, new TabMenu()).commit();
                         break;
                     default:
                         break;

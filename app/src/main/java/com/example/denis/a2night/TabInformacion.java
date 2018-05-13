@@ -2,7 +2,6 @@ package com.example.denis.a2night;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -57,15 +56,6 @@ public class TabInformacion extends Fragment {
                 Intent i = new Intent(Intent.ACTION_CALL);
                 i.setData(Uri.parse("tel:88428181"));
                 startActivity(i);
-            }
-        });
-        ImageView iconoMenu = (ImageView) view.findViewById(R.id.iconoMenu);
-        iconoMenu.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View arg0) {
-
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.contenido, new menuproductos()).commit();
             }
         });
 
