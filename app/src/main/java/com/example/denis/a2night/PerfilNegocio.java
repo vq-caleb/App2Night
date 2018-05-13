@@ -38,10 +38,6 @@ import java.util.Map;
 public class PerfilNegocio extends Fragment {
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     TextView idEmpresa, nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
-    ImageView fotoPerfilEmpresa;
-    Empresa empresa;
-    FirebaseStorage storage;
-    StorageReference storageRef;
     ImageView imagenPerfil,imagenPortada;
 
     public PerfilNegocio() {
@@ -52,177 +48,59 @@ public class PerfilNegocio extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil_negocio, container, false);
+
         ImageView MiImageView = (ImageView) view.findViewById(R.id.imagenAtrasBuscar);
         MiImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content, new Buscar01()).commit();
             }
         });
+
         alambrarVariables(view);
+        completarInformacion();
+
 
         OnclickDelTextView(R.id.info, view);
         OnclickDelTextView(R.id.publicacion, view);
         OnclickDelTextView(R.id.promo, view);
         OnclickDelTextView(R.id.evento, view);
-/*
-        final Map<String,Integer> imagenesPerfil = new HashMap();
-        imagenesPerfil.put("mercaditocr",R.drawable.mercadoescalante);
-        imagenesPerfil.put("entrenouscr",R.drawable.entrenous);
-        imagenesPerfil.put("saulbistrocr",R.drawable.saulbistro);
-        imagenesPerfil.put("aguizotescr",R.drawable.aguizotes);
-        imagenesPerfil.put("laconchacr",R.drawable.laconcha);
-        imagenesPerfil.put("antikcr",R.drawable.antik);
-        imagenesPerfil.put("lacalicr",R.drawable.lacali);
-        imagenesPerfil.put("cuartelcr",R.drawable.elcuartel);
-        imagenesPerfil.put("einsteincr",R.drawable.einstein);
-        imagenesPerfil.put("frathousecr",R.drawable.frat);
-        imagenesPerfil.put("xcapecr",R.drawable.xcape);
-        imagenesPerfil.put("caccioscr",R.drawable.caccios);
-*/
-    /*    Map<String,Integer> imagenesPortada = new HashMap();
-        imagenesPortada.put("mercaditocr",R.drawable.portadamercadito);
-        imagenesPortada.put("entrenouscr",R.drawable.portadaentre);
-        imagenesPortada.put("saulbistrocr",R.drawable.portadasaul);
-        imagenesPortada.put("aguizotescr",R.drawable.portadaaguizotes);
-        imagenesPortada.put("laconchacr",R.drawable.portadaconcha);
-        imagenesPortada.put("antikcr",R.drawable.portadaantik);
-        imagenesPortada.put("lacalicr",R.drawable.portadalacali);
-        imagenesPortada.put("cuartelcr",R.drawable.portadaelcuartel);
-        imagenesPortada.put("einsteincr",R.drawable.portadaeinstein);
-        imagenesPortada.put("frathousecr",R.drawable.portadafrat);
-        imagenesPortada.put("xcapecr",R.drawable.portadaxcape);
-        imagenesPortada.put("caccioscr",R.drawable.portadacaccios);
-*/
+
         imagenPerfil = (ImageView) view.findViewById(R.id.perfil);
         imagenPortada = (ImageView) view.findViewById(R.id.portada);
-       /* storage = FirebaseStorage.getInstance();
-        //creates a storage reference
-        storageRef = storage.getReference();*/
 
-        String imgPortada = "portadas/"+aGlobal.getIdEmpresaActual()+".png";
+        String imgPortada = "portadas/" + aGlobal.getIdEmpresaActual() + ".png";
         FirebaseStorage.getInstance().getReference().child(imgPortada).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.with(getActivity()).load(uri).into(imagenPortada);
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-               // Mensaje("hostiaTio");
             }
         });
 
-
-        String imgPerfil = "perfil/"+aGlobal.getIdEmpresaActual()+".png";
+        String imgPerfil = "perfil/" + aGlobal.getIdEmpresaActual() + ".png";
         FirebaseStorage.getInstance().getReference().child(imgPerfil).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.with(getActivity()).load(uri).into(imagenPerfil);
-                // Mensaje(imagenPerfil.getDrawable().toString());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-               // Mensaje("hostiaTio");
+
             }
         });
 
-
-
-        //imagenPerfil.setImageResource(imagenesPerfil.get(aGlobal.getIdEmpresaActual()));
-
-
-   //        imagenPortada.setImageResource(imagenesPortada.get(aGlobal.getIdEmpresaActual()));
-
         TextView info01 = (TextView) view.findViewById(R.id.publicacion);
         info01.setTextColor(getResources().getColor(R.color.colorPrimary));
+
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.contenido, new TabPost()).commit();
-        this.aGlobal.setEmpresa(new Empresa());
-        this.cargaEmpresa();
         return view;
-    }
-
-    public void cargaEmpresa(){
-
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        db.getReference().child("Bares")
-                .orderByKey()
-                .equalTo(aGlobal.getIdEmpresaActual())
-                .addValueEventListener(new ValueEventListener() {
-                                           @Override
-                                           public void onDataChange(DataSnapshot dataSnapshot)
-                                           {
-                                               for (DataSnapshot child : dataSnapshot.getChildren())
-                                               {
-                                                   String nombre = (String) child.child("nombre").getValue();
-                                                   String etiquetaUbicacion = (String) child.child("etiquetaUbicacion").getValue();
-                                                   String telefono1 = (String) child.child("telefono1").getValue();
-                                                   String telefono2 = (String) child.child("telefono2" ).getValue();
-                                                   String correo = (String) child.child("correo").getValue();
-                                                   String descripcion = (String) child.child("descripcion").getValue();
-                                                   String codigoVestimenta = (String) child.child("codigoVestimenta").getValue();
-                                                   String entrada = (String) child.child("entrada").getValue();
-                                                   String tipoNegocio = (String) child.child("tipoNegocio").getValue();
-                                                   Log.d("---empresaaaa-----",tipoNegocio);
-                                                   String paginaFacebook = (String) child.child("paginaFacebook").getValue();
-                                                   String paginaInstagram = (String) child.child("paginaInstagram").getValue();
-                                                   String paginaTwitter = (String) child.child("paginaTwitter").getValue();
-                                                   int cantidadAsistentes =  Integer.parseInt((String) child.child("cantidadAsistentes").getValue());
-                                                   List<Horario> horarioSemanal = null;
-                                                   empresa = new Empresa(aGlobal.getIdEmpresaActual(), nombre, etiquetaUbicacion, cantidadAsistentes,  tipoNegocio,
-                                                           paginaFacebook,  paginaInstagram, paginaTwitter,  telefono1,
-                                                           telefono2,  correo, descripcion,  codigoVestimenta,  entrada, horarioSemanal);
-
-
-                                                   // HERE WHAT CORRESPONDS TO JOIN
-                                                   FirebaseDatabase db = FirebaseDatabase.getInstance();
-                                                   db.getReference()
-                                                           .child("HorarioBar")
-                                                           .orderByKey()
-                                                           .equalTo(""+aGlobal.getIdEmpresaActual())
-                                                           .addValueEventListener(
-                                                                   new ValueEventListener()
-                                                                   {
-                                                                       @Override
-                                                                       public void onDataChange(DataSnapshot dataSnapshot)
-                                                                       {
-                                                                           List<Horario> horarioSemanal = new ArrayList<Horario>();
-
-                                                                           for (DataSnapshot child : dataSnapshot.getChildren()){
-                                                                               for(int i=0; i<7;i++){
-                                                                                   String dia = (String) child.child(""+i).child("dia").getValue();
-                                                                                   String horarioApertura = (String) child.child(""+i).child("horarioApertura").getValue();
-                                                                                   String horarioCierre = (String) child.child(""+i).child("horarioCierre").getValue();
-                                                                                   boolean abierto =  Boolean.parseBoolean((String)child.child(""+i).child("abierto").getValue());
-                                                                                   Horario h = new Horario(dia,horarioApertura,horarioCierre,abierto);
-                                                                                   horarioSemanal.add(h);
-                                                                               }
-                                                                               empresa.setHorarioSemanal(horarioSemanal);
-                                                                               aGlobal.setEmpresa(empresa);
-                                                                               completarInformacion();
-                                                                           }
-                                                                       }
-
-                                                                       @Override
-                                                                       public void onCancelled(DatabaseError databaseError)
-                                                                       {
-                                                                           Log.d("---OBJECT-----","-----ERROR---");
-                                                                       }
-                                                                   }
-                                                           );
-                                               }
-                                           }
-                                           @Override
-                                           public void onCancelled(DatabaseError databaseError)
-                                           {
-                                               Log.d("---OBJECT-----","-----ERROR2-----");
-                                           }
-                                       }
-                );
     }
 
     public void completarInformacion(){
@@ -254,7 +132,6 @@ public class PerfilNegocio extends Fragment {
                 TextView public01 = (TextView) getActivity().findViewById(R.id.publicacion);
                 TextView evento01 = (TextView) getActivity().findViewById(R.id.evento);
                 switch (v.getId()) {
-
                     case R.id.info:
                         info01.setTextColor(getResources().getColor(R.color.colorPrimary));
                         promo01.setTextColor(getResources().getColor(R.color.colorAccent));

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,12 @@ import android.widget.Toast;
 
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Horario;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -40,8 +46,10 @@ public class TabInformacion extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_informacion, container, false);
+        this.cargaHorarioEmpresa();
         this.alambrarVariables(view);
         this.completarInformacion();
+
         ImageView imgNumero = (ImageView) view.findViewById(R.id.imgTelefono);
         imgNumero.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -74,8 +82,43 @@ public class TabInformacion extends Fragment {
         this.paginaInstagram.setText(this.aGlobal.getEmpresa().getPaginaInstagram());
         this.paginaTwitter.setText(this.aGlobal.getEmpresa().getPaginaTwitter());
         this.estrellas.setRating(this.aGlobal.getEmpresa().getCalificacion());
-        completarInfoHorarioSemanal();
-        verificarEstadoHorario();
+    }
+
+    public void cargaHorarioEmpresa(){
+        List<Horario> horarioSemanal = null;
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        db.getReference()
+                .child("HorarioBar")
+                .orderByKey()
+                .equalTo(""+aGlobal.getIdEmpresaActual())
+                .addValueEventListener(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                List<Horario> horarioSemanal = new ArrayList<Horario>();
+                                for (DataSnapshot child : dataSnapshot.getChildren()){
+                                    for(int i=0; i<7;i++){
+                                        String dia = (String) child.child(""+i).child("dia").getValue();
+                                        String horarioApertura = (String) child.child(""+i).child("horarioApertura").getValue();
+                                        String horarioCierre = (String) child.child(""+i).child("horarioCierre").getValue();
+                                        boolean abierto =  Boolean.parseBoolean((String)child.child(""+i).child("abierto").getValue());
+                                        Horario h = new Horario(dia,horarioApertura,horarioCierre,abierto);
+                                        horarioSemanal.add(h);
+                                    }
+                                    aGlobal.getEmpresa().setHorarioSemanal(horarioSemanal);
+                                    completarInfoHorarioSemanal();
+                                    verificarEstadoHorario();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError)
+                            {
+                                Log.d("---OBJECT-----","-----ERROR---");
+                            }
+                        }
+                );
     }
 
     public void completarInfoHorarioSemanal(){
