@@ -1,8 +1,10 @@
 package com.example.denis.a2night;
 
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -27,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +42,9 @@ public class TabMenu extends Fragment {
     View view;
     ImageView imageView;
     String nombre, precio;
-    ArrayList<String> nombres = new ArrayList();
-    ArrayList<String> precios = new ArrayList();
     ArrayList<String> uris = new ArrayList();
     int cont = 0;
-
+    int index = 0;
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     public TabMenu() {
         // Required empty public constructor
@@ -55,7 +56,16 @@ public class TabMenu extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_tab_menu, container, false);
-        LlenarListaObjetos();
+        this.misObjetos = aGlobal.getProductosEmpresaActual();
+        //this.Mensaje(misObjetos.toString());.
+        /*for(Producto p : aGlobal.getProductosEmpresaActual()){
+
+        }*/
+        //Mensaje(aGlobal.getProductosEmpresaActual().toString());
+      /*  for (Producto p : aGlobal.getProductosEmpresaActual()){
+            Mensaje(p.getImagen2());
+        }*/
+        LlenarListView();
         return view;
     }
 
@@ -69,13 +79,13 @@ public class TabMenu extends Fragment {
                 public void onDataChange(DataSnapshot dataSnapshot)
                {
                    for (DataSnapshot child : dataSnapshot.getChildren()) {
-                       Mensaje(""+nombres.size());
-                       nombres.add(child.child("nombre").getValue().toString());
+                      // Mensaje(""+nombres.size());
+                      // nombres.add(child.child("nombre").getValue().toString());
                        //Mensaje(nombres.get(nombres.size()));
-                       precios.add(child.child("precio").getValue().toString());
+                      // precios.add(child.child("precio").getValue().toString());
                        //Mensaje(nombres.get(nombres.size()));
-                       String img = "menus/"+aGlobal.getIdEmpresaActual()+"/"+nombres.get(nombres.size()-1)+".jpg";
-                       uris.add(img);
+                     //  String img = "menus/"+aGlobal.getIdEmpresaActual()+"/"+nombres.get(nombres.size()-1)+".jpg";
+                     //  uris.add(img);
 
                    }
 
@@ -95,6 +105,8 @@ public class TabMenu extends Fragment {
         misObjetos.add(new Producto("A6-01", "A6-02", R.drawable.producto));
         misObjetos.add(new Producto("A7-01", "A7-02", R.drawable.producto));*/
     }
+
+
     private void LlenarListView() {
         Mensaje("llenando");
         ArrayAdapter<Producto> adapter = new MyListAdapter();
@@ -123,14 +135,18 @@ public class TabMenu extends Fragment {
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.lineaproducto, parent, false);
             }
-            Producto ObjetoActual = misObjetos.get(position);
+            Mensaje("Cargando productos");
+            Producto ObjetoActual = aGlobal.getProductosEmpresaActual().get(position);
+            Mensaje(ObjetoActual.getImagen2().toString());
             // Fill the view
             imageView = (ImageView)  itemView.findViewById(R.id.imgProducto);
-           /* FirebaseStorage.getInstance().getReference().child(ObjetoActual.getImagen()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            /*
+            FirebaseStorage.getInstance().getReference().child(ObjetoActual.getImagen()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Picasso.with(getActivity()).load(uri).into(imageView);
                     Mensaje(imageView.toString());
+
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -149,6 +165,7 @@ public class TabMenu extends Fragment {
 
         }
     }
+
 
     public void Mensaje(String msg){ Toast.makeText(getActivity(), msg,Toast.LENGTH_SHORT).show();};
 }

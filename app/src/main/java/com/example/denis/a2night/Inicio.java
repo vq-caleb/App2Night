@@ -127,7 +127,7 @@ public class Inicio extends Fragment {
     }
 
     private void random10Data(Object value) {
-        Mensaje(value.toString());
+        //Mensaje(value.toString());
        /* Mensaje("invocando");
         for(int i = 0; i < 5; i++){
             String name = UUID.randomUUID().toString();
