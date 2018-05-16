@@ -47,7 +47,7 @@ public class Inicio extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_inicio, container, false);
         //random10Data();
-        db = FirebaseDatabase.getInstance();
+        /*db = FirebaseDatabase.getInstance();
         db.getReference("Publicaciones").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -64,7 +64,7 @@ public class Inicio extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
 

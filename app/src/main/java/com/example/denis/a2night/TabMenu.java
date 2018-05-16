@@ -50,65 +50,19 @@ public class TabMenu extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_tab_menu, container, false);
         this.misObjetos = aGlobal.getProductosEmpresaActual();
-        //this.Mensaje(misObjetos.toString());.
-        /*for(Producto p : aGlobal.getProductosEmpresaActual()){
-
-        }*/
-        //Mensaje(aGlobal.getProductosEmpresaActual().toString());
-      /*  for (Producto p : aGlobal.getProductosEmpresaActual()){
-            Mensaje(p.getImagen2());
-        }*/
         LlenarListView();
         return view;
     }
 
-
     private List<Producto> misObjetos = new ArrayList<Producto>();
-    private void LlenarListaObjetos() {
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-       db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual())
-            .addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-               {
-                   for (DataSnapshot child : dataSnapshot.getChildren()) {
-                      // Mensaje(""+nombres.size());
-                      // nombres.add(child.child("nombre").getValue().toString());
-                       //Mensaje(nombres.get(nombres.size()));
-                      // precios.add(child.child("precio").getValue().toString());
-                       //Mensaje(nombres.get(nombres.size()));
-                     //  String img = "menus/"+aGlobal.getIdEmpresaActual()+"/"+nombres.get(nombres.size()-1)+".jpg";
-                     //  uris.add(img);
-
-                   }
-
-               }
-               @Override
-               public void onCancelled(DatabaseError databaseError) {
-                   Log.d("---OBJECT-----", "-----ERROR2-----");
-               }
-            }
-        );
-        //Mensaje(misObjetos.toString());
-        /*misObjetos.add(new Producto("A1-01", "A1-02", R.drawable.producto));
-        misObjetos.add(new Producto("A2-01", "A2-02", R.drawable.producto));
-        misObjetos.add(new Producto("A3-01", "A3-02", R.drawable.producto));
-        misObjetos.add(new Producto("A4-01", "A4-02", R.drawable.producto));
-        misObjetos.add(new Producto("A5-01", "A5-02", R.drawable.producto));
-        misObjetos.add(new Producto("A6-01", "A6-02", R.drawable.producto));
-        misObjetos.add(new Producto("A7-01", "A7-02", R.drawable.producto));*/
-    }
-
 
     private void LlenarListView() {
-        Mensaje("llenando");
         ArrayAdapter<Producto> adapter = new MyListAdapter();
         ListView list = (ListView) view.findViewById(R.id.menuProductos);
         list.setAdapter(adapter);
@@ -124,6 +78,7 @@ public class TabMenu extends Fragment {
             }
         });
     }
+
     private class MyListAdapter extends ArrayAdapter<Producto> {
         public MyListAdapter() {
             super(getActivity(), R.layout.lineaproducto, misObjetos);
@@ -135,26 +90,11 @@ public class TabMenu extends Fragment {
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.lineaproducto, parent, false);
             }
-            Mensaje("Cargando productos");
             Producto ObjetoActual = aGlobal.getProductosEmpresaActual().get(position);
-            Mensaje(ObjetoActual.getImagen2().toString());
+
             // Fill the view
             imageView = (ImageView)  itemView.findViewById(R.id.imgProducto);
-            /*
-            FirebaseStorage.getInstance().getReference().child(ObjetoActual.getImagen()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Picasso.with(getActivity()).load(uri).into(imageView);
-                    Mensaje(imageView.toString());
 
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-
-                }
-            });*/
             TextView elatributo01 = (TextView) itemView.findViewById(R.id.nombreProducto);
             elatributo01.setText(ObjetoActual.getAtributo01());
             TextView elatributo02 = (TextView) itemView.findViewById(R.id.precioProducto);
@@ -165,7 +105,6 @@ public class TabMenu extends Fragment {
 
         }
     }
-
 
     public void Mensaje(String msg){ Toast.makeText(getActivity(), msg,Toast.LENGTH_SHORT).show();};
 }

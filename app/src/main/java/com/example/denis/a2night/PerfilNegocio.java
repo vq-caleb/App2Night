@@ -101,7 +101,6 @@ public class PerfilNegocio extends Fragment {
 
         cargaProductos();
 
-
         TextView publi = (TextView) view.findViewById(R.id.publi);
         TextView info = (TextView) view.findViewById(R.id.info);
         TextView productos = (TextView) view.findViewById(R.id.productos);
@@ -189,9 +188,6 @@ public class PerfilNegocio extends Fragment {
                             imagen = "menus/" + aGlobal.getIdEmpresaActual() + "/"+nombre+".jpg";
                             aGlobal.agregaProducto(new Producto(nombre,precio,imagen));
                             productosCargados++;
-                             Mensaje(aGlobal.getProductosEmpresaActual().get(aGlobal.getProductosEmpresaActual().size()-1)+"");
-                            Mensaje(""+productosCargados);
-                            Mensaje(""+dataSnapshot.getChildrenCount());
 
                            if(productosCargados ==  dataSnapshot.getChildrenCount()){
                                 lastIndex = aGlobal.getProductosEmpresaActual().size();
@@ -208,19 +204,13 @@ public class PerfilNegocio extends Fragment {
 
 
     public void cargarImagenes(){
-        Mensaje("Cargando imágenes");
         final long ONE_MEGABYTE = 1024 * 1024;
-        Mensaje(""+(aGlobal.getProductosEmpresaActual().size()));
-
             FirebaseStorage.getInstance().getReference().
                     child(aGlobal.getProductosEmpresaActual().get(this.index).getImagen()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
                     index++;
                     aGlobal.getProductosEmpresaActual().get(index-1).setImagen2(bytes);
-                    Mensaje(index+"");
-                    Mensaje(bytes.toString());
-                    Mensaje(""+ aGlobal.getProductosEmpresaActual().get(index-1).getAtributo01());
                     if(index < aGlobal.getProductosEmpresaActual().size())
                     cargarImagenes();
                 }
@@ -230,51 +220,6 @@ public class PerfilNegocio extends Fragment {
                     // Handle any errors
                 }
             });
-
-
-
-
-
-
-      /*  Mensaje("Cargando imágenes");
-        final long ONE_MEGABYTE = 1024 * 1024;
-            FirebaseStorage.getInstance().getReference().
-                    child("meus").getActiveDownloadTasks()..addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    aGlobal.getProductosEmpresaActual().get(index).setImagen2(bytes);
-                    Mensaje(""+ aGlobal.getProductosEmpresaActual().get(index).getAtributo01());
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle any errors
-                }
-            });
-        }*/
-
-
-
-
         }
-
-    /*public void cargarImagenes() {
-        final long ONE_MEGABYTE = 1024 * 1024;
-        for (int i = 0; i < aGlobal.getProductosEmpresaActual().size(); i++) {
-            this.index = i;
-            FirebaseStorage.getInstance().getReference().child(aGlobal.getProductosEmpresaActual().get(i).getImagen()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    aGlobal.getProductosEmpresaActual().get(index).setImagen2(bytes);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle any errors
-                }
-            });
-        }
-    }*/
-
 }
 
