@@ -47,22 +47,24 @@ public class Inicio extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_inicio, container, false);
         //random10Data();
-        db = FirebaseDatabase.getInstance();
+        /*db = FirebaseDatabase.getInstance();
         db.getReference("Publicaciones").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 aGlobal.setTotalPublicaciones(Integer.parseInt(""+dataSnapshot.getChildrenCount()));
                 Mensaje(""+aGlobal.getTotalPublicaciones());
-                random10Data();
-                if(items.size() >= aGlobal.getTotalPublicaciones())
-                    flag = false;
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    random10Data(child.child("imagen").getValue());
+                    if (items.size() >= aGlobal.getTotalPublicaciones())
+                        flag = false;
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
 
@@ -124,14 +126,15 @@ public class Inicio extends Fragment {
 
     }
 
-    private void random10Data() {
-
-        Mensaje("invocando");
+    private void random10Data(Object value) {
+        //Mensaje(value.toString());
+       /* Mensaje("invocando");
         for(int i = 0; i < 5; i++){
             String name = UUID.randomUUID().toString();
             Item item = new Item(name, name.length());
             items.add(item);
-        }
+        }*/
+       // items.add(item);
     }
 
     public void Mensaje(String msg){

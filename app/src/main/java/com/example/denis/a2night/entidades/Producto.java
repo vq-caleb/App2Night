@@ -17,10 +17,17 @@ public class Producto {
         this.imagen2 = imagen2;
     }*/
 
-    public Producto(String atributo01, String atributo02, byte[] imagen2){
+   public Producto(String atributo01, String atributo02, String imagen){
+       this.atributo01 = atributo01;
+       this.atributo02 = atributo02;
+       this.imagen = imagen;
+   }
+
+    public Producto(String atributo01, String atributo02, String imagen, byte[] imagen2){
         super();
         this.atributo01 = atributo01;
         this.atributo02 = atributo02;
+        this.imagen = imagen;
         this.imagen2 = imagen2;
     }
 
@@ -36,4 +43,5 @@ public class Producto {
     public byte[] getImagen2(){return imagen2;}
     public void setAtributo01(String atributo01) {this.atributo01 = atributo01;}
     public void setAtributo02(String atributo02) {this.atributo02 = atributo02;}
+    public void setImagen2(byte[] imagen2){this.imagen2 = imagen2;}
 }

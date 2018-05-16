@@ -4,6 +4,7 @@ package com.example.denis.a2night;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
+import com.example.denis.a2night.entidades.Empresa;
+import com.example.denis.a2night.entidades.Horario;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -51,10 +61,8 @@ public class Buscar01 extends Fragment {
         MiImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Fragment perfilNegocio = new PerfilNegocio();
                 aGlobal.setIdEmpresaActual("entrenouscr");
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -62,9 +70,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("saulbistrocr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -72,9 +78,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("aguizotescr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -82,9 +86,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("mercaditocr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -92,9 +94,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("laconchacr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -102,9 +102,8 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("antikcr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
+
             }
         });
 
@@ -112,9 +111,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("lacalicr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -122,9 +119,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("cuartelcr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -132,9 +127,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("einsteincr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -142,9 +135,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("frathousecr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -152,9 +143,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("caccioscr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -162,9 +151,7 @@ public class Buscar01 extends Fragment {
             @Override
             public void onClick(View v) {
                 aGlobal.setIdEmpresaActual("xcapecr");
-                //Fragment perfilNegocio = new PerfilNegocio();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                setEmpresaActual();
             }
         });
 
@@ -203,5 +190,40 @@ public class Buscar01 extends Fragment {
         transaction.replace(R.id.content, new PerfilNegocio()).commit();
     }
 
+
+    public void setEmpresaActual(){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        db.getReference().child("Bares").child(aGlobal.getIdEmpresaActual()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot child) {
+                    String idEmpresa = child.getKey();
+                    String nombre = (String) child.child("nombre").getValue();
+                    String etiquetaUbicacion = (String) child.child("etiquetaUbicacion").getValue();
+                    String telefono1 = (String) child.child("telefono1").getValue();
+                    String telefono2 = (String) child.child("telefono2" ).getValue();
+                    String correo = (String) child.child("correo").getValue();
+                    String descripcion = (String) child.child("descripcion").getValue();
+                    String codigoVestimenta = (String) child.child("codigoVestimenta").getValue();
+                    String entrada = (String) child.child("entrada").getValue();
+                    String tipoNegocio = (String) child.child("tipoNegocio").getValue();
+                    String paginaFacebook = (String) child.child("paginaFacebook").getValue();
+                    String paginaInstagram = (String) child.child("paginaInstagram").getValue();
+                    String paginaTwitter = (String) child.child("paginaTwitter").getValue();
+                    int cantidadAsistentes = Integer.parseInt((String) child.child("cantidadAsistentes").getValue());
+                    List<Horario> horarioSemanal = null;
+                    aGlobal.setEmpresa(new Empresa(idEmpresa, nombre, etiquetaUbicacion, cantidadAsistentes,  tipoNegocio,
+                            paginaFacebook,  paginaInstagram, paginaTwitter,  telefono1,
+                            telefono2,  correo, descripcion,  codigoVestimenta,  entrada, horarioSemanal));
+                    Mensaje(aGlobal.getEmpresa().getNombre());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("---OBJECT-----", "-----ERROR2-----");
+            }
+            }
+        );
+    }
 }
 

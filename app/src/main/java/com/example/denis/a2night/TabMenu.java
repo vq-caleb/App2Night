@@ -1,8 +1,10 @@
 package com.example.denis.a2night;
 
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -21,11 +23,13 @@ import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Producto;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,82 +42,27 @@ public class TabMenu extends Fragment {
     View view;
     ImageView imageView;
     String nombre, precio;
-    ArrayList<String> nombres = new ArrayList();
-    ArrayList<String> precios = new ArrayList();
     ArrayList<String> uris = new ArrayList();
     int cont = 0;
-
+    int index = 0;
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     public TabMenu() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_tab_menu, container, false);
-        LlenarListaObjetos();
+        this.misObjetos = aGlobal.getProductosEmpresaActual();
+        LlenarListView();
         return view;
     }
 
     private List<Producto> misObjetos = new ArrayList<Producto>();
-    private void LlenarListaObjetos() {
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual())
-            .addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-               {
-                   for (DataSnapshot child : dataSnapshot.getChildren()) {
-                       Mensaje(""+nombres.size());
-                       nombres.add(child.child("nombre").getValue().toString());
-                       //Mensaje(nombres.get(nombres.size()));
-                       precios.add(child.child("precio").getValue().toString());
-                       //Mensaje(nombres.get(nombres.size()));
-                       String img = "menus/"+aGlobal.getIdEmpresaActual()+"/"+nombres.get(nombres.size()-1)+".jpg";
-                       uris.add(img);
-                       final long ONE_MEGABYTE = 1024 * 1024;
-                       Mensaje(uris.get(cont));
-                       FirebaseStorage.getInstance().getReference().child(uris.get(cont)).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                           @Override
-                           public void onSuccess(byte[] bytes) {
-                               cont++;
-                               Mensaje(""+cont);
-                               misObjetos.add(new Producto(nombres.get(cont-1), precios.get(cont-1),bytes));
-                               if(cont ==3){
-                                   LlenarListView();
-                                   RegistrarClicks();
-                               }
-                           }
-                       }).addOnFailureListener(new OnFailureListener() {
-                           @Override
-                           public void onFailure(@NonNull Exception exception) {
-                               Mensaje("te has jodido");
-                           }
-                       });
 
-                   }
-
-               }
-               @Override
-               public void onCancelled(DatabaseError databaseError) {
-                   Log.d("---OBJECT-----", "-----ERROR2-----");
-               }
-            }
-        );
-        //Mensaje(misObjetos.toString());
-        /*misObjetos.add(new Producto("A1-01", "A1-02", R.drawable.producto));
-        misObjetos.add(new Producto("A2-01", "A2-02", R.drawable.producto));
-        misObjetos.add(new Producto("A3-01", "A3-02", R.drawable.producto));
-        misObjetos.add(new Producto("A4-01", "A4-02", R.drawable.producto));
-        misObjetos.add(new Producto("A5-01", "A5-02", R.drawable.producto));
-        misObjetos.add(new Producto("A6-01", "A6-02", R.drawable.producto));
-        misObjetos.add(new Producto("A7-01", "A7-02", R.drawable.producto));*/
-    }
     private void LlenarListView() {
-        Mensaje("llenando");
         ArrayAdapter<Producto> adapter = new MyListAdapter();
         ListView list = (ListView) view.findViewById(R.id.menuProductos);
         list.setAdapter(adapter);
@@ -129,6 +78,7 @@ public class TabMenu extends Fragment {
             }
         });
     }
+
     private class MyListAdapter extends ArrayAdapter<Producto> {
         public MyListAdapter() {
             super(getActivity(), R.layout.lineaproducto, misObjetos);
@@ -140,22 +90,11 @@ public class TabMenu extends Fragment {
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.lineaproducto, parent, false);
             }
-            Producto ObjetoActual = misObjetos.get(position);
+            Producto ObjetoActual = aGlobal.getProductosEmpresaActual().get(position);
+
             // Fill the view
             imageView = (ImageView)  itemView.findViewById(R.id.imgProducto);
-           /* FirebaseStorage.getInstance().getReference().child(ObjetoActual.getImagen()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Picasso.with(getActivity()).load(uri).into(imageView);
-                    Mensaje(imageView.toString());
 
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-
-                }
-            });*/
             TextView elatributo01 = (TextView) itemView.findViewById(R.id.nombreProducto);
             elatributo01.setText(ObjetoActual.getAtributo01());
             TextView elatributo02 = (TextView) itemView.findViewById(R.id.precioProducto);

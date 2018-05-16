@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Empresa;
 import com.example.denis.a2night.entidades.Horario;
+import com.example.denis.a2night.entidades.Producto;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +40,11 @@ public class PerfilNegocio extends Fragment {
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     TextView idEmpresa, nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
     ImageView imagenPerfil,imagenPortada;
-
+    byte[] imagen2;
+    String nombre,precio,imagen;
+    int index = 0, lastIndex;
+    int productosCargados = 0;
+    FirebaseDatabase db;
     public PerfilNegocio() {
         // Required empty public constructor
     }
@@ -93,6 +98,8 @@ public class PerfilNegocio extends Fragment {
 
             }
         });
+
+        cargaProductos();
 
         TextView publi = (TextView) view.findViewById(R.id.publi);
         TextView info = (TextView) view.findViewById(R.id.info);
@@ -166,4 +173,53 @@ public class PerfilNegocio extends Fragment {
 
     public void Mensaje(String msg){
         Toast.makeText(getActivity(), msg,Toast.LENGTH_SHORT).show();};
+
+    public void cargaProductos(){
+        aGlobal.setProductosEmpresaActual(new ArrayList<Producto>());
+        db = FirebaseDatabase.getInstance();
+        db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            nombre = (child.child("nombre").getValue().toString());
+                            precio = (child.child("precio").getValue().toString());
+                            imagen = "menus/" + aGlobal.getIdEmpresaActual() + "/"+nombre+".jpg";
+                            aGlobal.agregaProducto(new Producto(nombre,precio,imagen));
+                            productosCargados++;
+
+                           if(productosCargados ==  dataSnapshot.getChildrenCount()){
+                                lastIndex = aGlobal.getProductosEmpresaActual().size();
+                                cargarImagenes();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d("---OBJECT-----", "-----ERROR2-----");
+                    }
+                });
+    }
+
+
+    public void cargarImagenes(){
+        final long ONE_MEGABYTE = 1024 * 1024;
+            FirebaseStorage.getInstance().getReference().
+                    child(aGlobal.getProductosEmpresaActual().get(this.index).getImagen()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    index++;
+                    aGlobal.getProductosEmpresaActual().get(index-1).setImagen2(bytes);
+                    if(index < aGlobal.getProductosEmpresaActual().size())
+                    cargarImagenes();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+        }
 }
+
