@@ -1,13 +1,361 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_red_dark"
     tools:context="com.example.denis.a2night.EditarPerfil">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Editar Información"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titulo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="Correo Electronico:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.032"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="350dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.346"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo1" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Nombre:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
+
+        <EditText
+            android:id="@+id/nombre"
+            android:layout_width="152dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/titulo2"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Telefono 1:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombre" />
+
+        <TextView
+            android:id="@+id/titulo5"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="8dp"
+            android:text="Etiqueta:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
+
+        <EditText
+            android:id="@+id/telefono2"
+            android:layout_width="152dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/nombre"
+            app:layout_constraintTop_toBottomOf="@+id/titulo5" />
+
+        <EditText
+            android:id="@+id/telefono1"
+            android:layout_width="152dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo2" />
+
+        <TextView
+            android:id="@+id/titulo3"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Telefono 2:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/titulo2"
+            app:layout_constraintTop_toBottomOf="@+id/nombre" />
+
+
+        <EditText
+            android:id="@+id/telefono2"
+            android:layout_width="152dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/telefono1"
+            app:layout_constraintTop_toBottomOf="@+id/titulo3" />
+
+        <EditText
+            android:id="@+id/pagFacebook"
+            android:layout_width="205dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo4" />
+
+        <TextView
+            android:id="@+id/titulo4"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Pagina Facebook:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/telefono1" />
+
+        <TextView
+            android:id="@+id/titulo8"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Pagina Twitter:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pagInstagram" />
+
+        <EditText
+            android:id="@+id/pagTwitter"
+            android:layout_width="205dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo8"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/titulo7"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Pagina Instagram:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pagFacebook" />
+
+        <EditText
+            android:id="@+id/pagInstagram"
+            android:layout_width="205dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo7" />
+
+
+        <TextView
+            android:id="@+id/titulo9"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Tipo Empresa:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.644"
+            app:layout_constraintStart_toEndOf="@+id/titulo4"
+            app:layout_constraintTop_toBottomOf="@+id/telefono2" />
+
+
+        <EditText
+            android:id="@+id/tipo"
+            android:layout_width="118dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintStart_toEndOf="@+id/pagFacebook"
+            app:layout_constraintTop_toBottomOf="@+id/titulo9" />
+
+        <TextView
+            android:id="@+id/titulo10"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Entrada:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintStart_toEndOf="@+id/titulo7"
+            app:layout_constraintTop_toBottomOf="@+id/tipo" />
+
+
+        <EditText
+            android:id="@+id/cover"
+            android:layout_width="118dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.172"
+            app:layout_constraintStart_toEndOf="@+id/pagInstagram"
+            app:layout_constraintTop_toBottomOf="@+id/titulo10" />
+
+        <TextView
+            android:id="@+id/titulo11"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Codigo Vestimenta:"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.824"
+            app:layout_constraintStart_toEndOf="@+id/titulo8"
+            app:layout_constraintTop_toBottomOf="@+id/cover" />
+
+        <EditText
+            android:id="@+id/codVestimenta"
+            android:layout_width="118dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:backgroundTint="@android:color/background_light"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColorLink="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.172"
+            app:layout_constraintStart_toEndOf="@+id/pagTwitter"
+            app:layout_constraintTop_toBottomOf="@+id/titulo11"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </android.support.constraint.ConstraintLayout>
+
 
 </FrameLayout>
