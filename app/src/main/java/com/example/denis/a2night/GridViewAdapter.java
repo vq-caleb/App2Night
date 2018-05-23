@@ -1,6 +1,7 @@
 package com.example.denis.a2night;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,7 @@ import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -43,21 +45,15 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ImageView imageView;
+
         if(convertView == null){
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(250, 250));
-            imageView.setImageResource(lstSource.get(position));
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(mContext, imageView.getId()+"", Toast.LENGTH_SHORT).show();
-                }
-            });
+            LayoutInflater inflater = (LayoutInflater) mContext
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.item_grid, null);
         }
-        else
-            imageView = (ImageView) convertView;
-        return imageView;
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.imagen_post);
+        imageView.setImageResource(lstSource.get(position));
+
+        return convertView;
     }
 }
-

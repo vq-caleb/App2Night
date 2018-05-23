@@ -17,15 +17,24 @@ import java.util.List;
  */
 public class TabPost extends Fragment {
 
+    private GridView gridView;
+    private GridViewAdapter adapter;
+
     private static final String  TAG = "TabPost";
 
     Integer[] array_characters = {
-            R.drawable.frat,
-            R.drawable.frat,
-            R.drawable.frat,
-            R.drawable.frat,
-            R.drawable.frat,
-            R.drawable.frat
+            R.drawable.einstein,
+            R.drawable.antik,
+            R.drawable.xcape,
+            R.drawable.lacali,
+            R.drawable.laconcha,
+            R.drawable.caccios,
+            R.drawable.einstein,
+            R.drawable.antik,
+            R.drawable.xcape,
+            R.drawable.lacali,
+            R.drawable.laconcha,
+            R.drawable.caccios
     };
 
     List<Integer> lstSource = new ArrayList<>();
@@ -42,8 +51,8 @@ public class TabPost extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_tab_post, container, false);
         setUpList();
-        GridView gridView = (GridView) view.findViewById(R.id.grid02);
-        GridViewAdapter adapter = new GridViewAdapter(lstSource, getActivity());
+        gridView = (GridView) view.findViewById(R.id.grid02);
+        adapter = new GridViewAdapter(lstSource, getActivity());
         gridView.setAdapter(adapter);
 
         return view;

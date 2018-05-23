@@ -19,9 +19,9 @@
             android:id="@+id/atrasBusqueda"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            app:srcCompat="@drawable/ic_navigate_before_black_40dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_navigate_before_black_40dp" />
 
         <TextView
             android:id="@+id/textView39"
