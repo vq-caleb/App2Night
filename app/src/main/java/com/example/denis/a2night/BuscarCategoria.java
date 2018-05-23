@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Empresa;
 import com.example.denis.a2night.entidades.Horario;
-import com.example.denis.a2night.entidades.Producto;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,7 +40,7 @@ public class BuscarCategoria extends Fragment {
         LlenarListaObjetos();
         listView = (ListView) view.findViewById(R.id.lvItems);
         listView.setDivider(null);
-        MiImageView   = (ImageView) view.findViewById(R.id.atrasBusqueda);
+        MiImageView   = (ImageView) view.findViewById(R.id.atrasPerfil);
 
         MiImageView.setOnClickListener(new View.OnClickListener() {
             @Override

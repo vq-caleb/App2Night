@@ -34,6 +34,13 @@ public class TabPost extends Fragment {
             R.drawable.xcape,
             R.drawable.lacali,
             R.drawable.laconcha,
+            R.drawable.caccios,
+            R.drawable.caccios,
+            R.drawable.einstein,
+            R.drawable.antik,
+            R.drawable.xcape,
+            R.drawable.lacali,
+            R.drawable.laconcha,
             R.drawable.caccios
     };
 

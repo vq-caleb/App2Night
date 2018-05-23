@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/imageView8"
+                    android:id="@+id/editarMenu"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginEnd="32dp"
@@ -98,20 +98,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/seguidores"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/border_circle"
                     android:padding="16dp"
                     android:src="@drawable/ic_people_black_24dp"
                     android:tint="@android:color/darker_gray"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                    app:layout_constraintEnd_toStartOf="@+id/editarMenu"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView10"
+                    app:layout_constraintStart_toEndOf="@+id/editarPerfil"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/editarPerfil"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginStart="32dp"
@@ -123,7 +123,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/agregarPubli"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginStart="32dp"
@@ -136,7 +136,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/agregarProduc"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="32dp"
@@ -144,13 +144,13 @@
                     android:padding="16dp"
                     android:tint="@android:color/darker_gray"
                     android:src="@drawable/ic_add_shopping_cart_black_24dp"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                    app:layout_constraintEnd_toStartOf="@+id/cerrarSesion"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintStart_toEndOf="@+id/agregarPubli"
                     app:layout_constraintTop_toBottomOf="@+id/textView45" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/cerrarSesion"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginEnd="32dp"
@@ -172,7 +172,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                    app:layout_constraintTop_toBottomOf="@+id/editarPerfil" />
 
                 <TextView
                     android:id="@+id/textView45"
@@ -185,7 +185,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/textView47"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/textView44"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                    app:layout_constraintTop_toBottomOf="@+id/seguidores" />
 
                 <TextView
                     android:id="@+id/textView47"
@@ -197,7 +197,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                    app:layout_constraintTop_toBottomOf="@+id/editarMenu" />
 
                 <TextView
                     android:id="@+id/textView41"
@@ -210,7 +210,7 @@
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/agregarPubli" />
 
                 <TextView
                     android:id="@+id/textView42"
@@ -223,7 +223,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/textView48"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/textView41"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/agregarProduc" />
 
                 <TextView
                     android:id="@+id/textView48"
@@ -235,7 +235,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/cerrarSesion" />
             </android.support.constraint.ConstraintLayout>
 
         </ScrollView>

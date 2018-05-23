@@ -65,6 +65,7 @@ public class TabMenu extends Fragment {
     private void LlenarListView() {
         ArrayAdapter<Producto> adapter = new MyListAdapter();
         ListView list = (ListView) view.findViewById(R.id.menuProductos);
+        list.setDivider(null);
         list.setAdapter(adapter);
     }
     private void RegistrarClicks() {
