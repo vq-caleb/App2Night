@@ -28,6 +28,7 @@ import java.util.Map;
 
 public class AlmacenamientoGlobal {
     private Empresa empresa ;
+    private Empresa empresaUsuario;
     private String idEmpresaActual;
     private int ultimaPublicacion = 0;
     private int totalPublicaciones = 0;
@@ -74,5 +75,13 @@ public class AlmacenamientoGlobal {
 
     public void setProductosEmpresaActual(ArrayList<Producto> p){
         this.productosEmpresaActual = p;
+    }
+
+    public Empresa getEmpresaUsuario() {
+        return empresaUsuario;
+    }
+
+    public void setEmpresaUsuario(Empresa empresaUsuario) {
+        this.empresaUsuario = empresaUsuario;
     }
 }

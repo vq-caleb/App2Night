@@ -13,13 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
+import com.example.denis.a2night.entidades.Empresa;
+import com.google.firebase.auth.FirebaseAuth;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Perfil extends Fragment {
-
-    //TextView video;
+    AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
 
     public Perfil() {
         // Required empty public constructor
@@ -31,6 +34,7 @@ public class Perfil extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        aGlobal.setEmpresaUsuario(new Empresa());
 
         OnclickDelButton(view.findViewById(R.id.editarPerfil));
         OnclickDelButton(view.findViewById(R.id.seguidores));
@@ -71,6 +75,9 @@ public class Perfil extends Fragment {
                         break;
 
                     case R.id.salir:
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intento = new Intent(getActivity(), Login.class);
+                        startActivity(intento);
                         break;
                     default:break; }// fin de casos
             }// fin del onclick
