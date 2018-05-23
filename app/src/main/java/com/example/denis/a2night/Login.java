@@ -50,15 +50,16 @@ public class Login extends AppCompatActivity {
 
         // Inicializando autenticación
         mAuth = FirebaseAuth.getInstance();
-        /*
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user != null) {
             Mensaje("Habemus login");
             Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
             startActivity(intento1);
         } else {
             Mensaje("Hostia chaval inicia sesión");
-        }*/
+        }
 
         OnclickDelButton(R.id.btnIniciar);
         OnclickImageView(R.id.imgAtrasBuscar);
@@ -157,9 +158,9 @@ public class Login extends AppCompatActivity {
                 switch (v.getId()) {
 
                     case R.id.btnIniciar:
-                        //iniciarSesion();
-                        Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
-                        startActivity(intento1);
+                        iniciarSesion();
+                        /*Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
+                        startActivity(intento1);*/
                         /*Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
                         startActivity(intento1);*/
                         break;

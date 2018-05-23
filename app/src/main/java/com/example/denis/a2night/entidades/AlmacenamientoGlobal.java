@@ -32,6 +32,7 @@ public class AlmacenamientoGlobal {
     private int ultimaPublicacion = 0;
     private int totalPublicaciones = 0;
     private static AlmacenamientoGlobal instance = null;
+    private ArrayList<Producto>  productosEmpresaActual = new ArrayList<Producto>();
 
     protected AlmacenamientoGlobal() {
     }
@@ -61,5 +62,17 @@ public class AlmacenamientoGlobal {
 
     public void setTotalPublicaciones(int totalPublicaciones) {this.totalPublicaciones = totalPublicaciones;}
 
+    public void agregaProducto(Producto p){
+        this.productosEmpresaActual.add(p);
+    }
+
     public static void setInstance(AlmacenamientoGlobal instance) {AlmacenamientoGlobal.instance = instance;}
+
+    public ArrayList<Producto> getProductosEmpresaActual(){
+        return this.productosEmpresaActual;
+    }
+
+    public void setProductosEmpresaActual(ArrayList<Producto> p){
+        this.productosEmpresaActual = p;
+    }
 }

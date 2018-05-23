@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Principal extends AppCompatActivity {
 
@@ -13,6 +17,16 @@ public class Principal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         getSupportActionBar().hide();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            Mensaje("Habemus login");
+            Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
+            startActivity(intento1);
+        } else {
+            Mensaje("Hostia chaval inicia sesión");
+        }
 
         OnclickDelButton(R.id.btnLogin);
         OnclickDelButton(R.id.btnRegistro);
@@ -40,5 +54,11 @@ public class Principal extends AppCompatActivity {
             }// fin del onclick
         });
     }// fin de OnclickDelButton
+
+
+
+    public void Mensaje(String msg){
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    };
 
 }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Empresa;
 import com.example.denis.a2night.entidades.Horario;
+import com.example.denis.a2night.entidades.Producto;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -38,12 +39,12 @@ import java.util.Map;
 public class PerfilNegocio extends Fragment {
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
     TextView idEmpresa, nombreEmpresa, etiquetaUbicacion, cantidadSeguidores, cantidadAsistentes;
-    ImageView fotoPerfilEmpresa;
-    Empresa empresa;
-    FirebaseStorage storage;
-    StorageReference storageRef;
     ImageView imagenPerfil,imagenPortada;
-
+    byte[] imagen2;
+    String nombre,precio,imagen;
+    int index = 0, lastIndex;
+    int productosCargados = 0;
+    FirebaseDatabase db;
     public PerfilNegocio() {
         // Required empty public constructor
     }
@@ -52,15 +53,19 @@ public class PerfilNegocio extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil_negocio, container, false);
+
         ImageView MiImageView = (ImageView) view.findViewById(R.id.imagenAtrasBuscar);
         MiImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content, new Buscar01()).commit();
             }
         });
+
         alambrarVariables(view);
+        completarInformacion();
+
 
         OnclickDelTextView(R.id.info, view);
         OnclickDelTextView(R.id.publi, view);
@@ -68,39 +73,33 @@ public class PerfilNegocio extends Fragment {
 
         imagenPerfil = (ImageView) view.findViewById(R.id.perfil);
         imagenPortada = (ImageView) view.findViewById(R.id.portada);
-       /* storage = FirebaseStorage.getInstance();
-        //creates a storage reference
-        storageRef = storage.getReference();*/
 
-        String imgPortada = "portadas/"+aGlobal.getIdEmpresaActual()+".png";
+        String imgPortada = "portadas/" + aGlobal.getIdEmpresaActual() + ".png";
         FirebaseStorage.getInstance().getReference().child(imgPortada).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.with(getActivity()).load(uri).into(imagenPortada);
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-               // Mensaje("hostiaTio");
             }
         });
 
-
-        String imgPerfil = "perfil/"+aGlobal.getIdEmpresaActual()+".png";
+        String imgPerfil = "perfil/" + aGlobal.getIdEmpresaActual() + ".png";
         FirebaseStorage.getInstance().getReference().child(imgPerfil).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.with(getActivity()).load(uri).into(imagenPerfil);
-                // Mensaje(imagenPerfil.getDrawable().toString());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-               // Mensaje("hostiaTio");
+
             }
         });
 
+        cargaProductos();
 
         TextView publi = (TextView) view.findViewById(R.id.publi);
         TextView info = (TextView) view.findViewById(R.id.info);
@@ -111,88 +110,7 @@ public class PerfilNegocio extends Fragment {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.contenido, new TabPost()).commit();
-        this.aGlobal.setEmpresa(new Empresa());
-        this.cargaEmpresa();
         return view;
-    }
-
-    public void cargaEmpresa(){
-
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        db.getReference().child("Bares")
-                .orderByKey()
-                .equalTo(aGlobal.getIdEmpresaActual())
-                .addValueEventListener(new ValueEventListener() {
-                                           @Override
-                                           public void onDataChange(DataSnapshot dataSnapshot)
-                                           {
-                                               for (DataSnapshot child : dataSnapshot.getChildren())
-                                               {
-                                                   String nombre = (String) child.child("nombre").getValue();
-                                                   String etiquetaUbicacion = (String) child.child("etiquetaUbicacion").getValue();
-                                                   String telefono1 = (String) child.child("telefono1").getValue();
-                                                   String telefono2 = (String) child.child("telefono2" ).getValue();
-                                                   String correo = (String) child.child("correo").getValue();
-                                                   String descripcion = (String) child.child("descripcion").getValue();
-                                                   String codigoVestimenta = (String) child.child("codigoVestimenta").getValue();
-                                                   String entrada = (String) child.child("entrada").getValue();
-                                                   String tipoNegocio = (String) child.child("tipoNegocio").getValue();
-                                                   Log.d("---empresaaaa-----",tipoNegocio);
-                                                   String paginaFacebook = (String) child.child("paginaFacebook").getValue();
-                                                   String paginaInstagram = (String) child.child("paginaInstagram").getValue();
-                                                   String paginaTwitter = (String) child.child("paginaTwitter").getValue();
-                                                   int cantidadAsistentes =  Integer.parseInt((String) child.child("cantidadAsistentes").getValue());
-                                                   List<Horario> horarioSemanal = null;
-                                                   empresa = new Empresa(aGlobal.getIdEmpresaActual(), nombre, etiquetaUbicacion, cantidadAsistentes,  tipoNegocio,
-                                                           paginaFacebook,  paginaInstagram, paginaTwitter,  telefono1,
-                                                           telefono2,  correo, descripcion,  codigoVestimenta,  entrada, horarioSemanal);
-
-
-                                                   // HERE WHAT CORRESPONDS TO JOIN
-                                                   FirebaseDatabase db = FirebaseDatabase.getInstance();
-                                                   db.getReference()
-                                                           .child("HorarioBar")
-                                                           .orderByKey()
-                                                           .equalTo(""+aGlobal.getIdEmpresaActual())
-                                                           .addValueEventListener(
-                                                                   new ValueEventListener()
-                                                                   {
-                                                                       @Override
-                                                                       public void onDataChange(DataSnapshot dataSnapshot)
-                                                                       {
-                                                                           List<Horario> horarioSemanal = new ArrayList<Horario>();
-
-                                                                           for (DataSnapshot child : dataSnapshot.getChildren()){
-                                                                               for(int i=0; i<7;i++){
-                                                                                   String dia = (String) child.child(""+i).child("dia").getValue();
-                                                                                   String horarioApertura = (String) child.child(""+i).child("horarioApertura").getValue();
-                                                                                   String horarioCierre = (String) child.child(""+i).child("horarioCierre").getValue();
-                                                                                   boolean abierto =  Boolean.parseBoolean((String)child.child(""+i).child("abierto").getValue());
-                                                                                   Horario h = new Horario(dia,horarioApertura,horarioCierre,abierto);
-                                                                                   horarioSemanal.add(h);
-                                                                               }
-                                                                               empresa.setHorarioSemanal(horarioSemanal);
-                                                                               aGlobal.setEmpresa(empresa);
-                                                                               completarInformacion();
-                                                                           }
-                                                                       }
-
-                                                                       @Override
-                                                                       public void onCancelled(DatabaseError databaseError)
-                                                                       {
-                                                                           Log.d("---OBJECT-----","-----ERROR---");
-                                                                       }
-                                                                   }
-                                                           );
-                                               }
-                                           }
-                                           @Override
-                                           public void onCancelled(DatabaseError databaseError)
-                                           {
-                                               Log.d("---OBJECT-----","-----ERROR2-----");
-                                           }
-                                       }
-                );
     }
 
     public void completarInformacion(){
@@ -223,7 +141,6 @@ public class PerfilNegocio extends Fragment {
                 TextView public01 = (TextView) getActivity().findViewById(R.id.publi);
                 TextView product01 = (TextView) getActivity().findViewById(R.id.productos);
                 switch (v.getId()) {
-
                     case R.id.info:
                         info01.setTextColor(getResources().getColor(R.color.colorPrimary));
                         product01.setTextColor(getResources().getColor(R.color.colorGray));
@@ -256,4 +173,53 @@ public class PerfilNegocio extends Fragment {
 
     public void Mensaje(String msg){
         Toast.makeText(getActivity(), msg,Toast.LENGTH_SHORT).show();};
+
+    public void cargaProductos(){
+        aGlobal.setProductosEmpresaActual(new ArrayList<Producto>());
+        db = FirebaseDatabase.getInstance();
+        db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            nombre = (child.child("nombre").getValue().toString());
+                            precio = (child.child("precio").getValue().toString());
+                            imagen = "menus/" + aGlobal.getIdEmpresaActual() + "/"+nombre+".jpg";
+                            aGlobal.agregaProducto(new Producto(nombre,precio,imagen));
+                            productosCargados++;
+
+                           if(productosCargados ==  dataSnapshot.getChildrenCount()){
+                                lastIndex = aGlobal.getProductosEmpresaActual().size();
+                                cargarImagenes();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d("---OBJECT-----", "-----ERROR2-----");
+                    }
+                });
+    }
+
+
+    public void cargarImagenes(){
+        final long ONE_MEGABYTE = 1024 * 1024;
+            FirebaseStorage.getInstance().getReference().
+                    child(aGlobal.getProductosEmpresaActual().get(this.index).getImagen()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    index++;
+                    aGlobal.getProductosEmpresaActual().get(index-1).setImagen2(bytes);
+                    if(index < aGlobal.getProductosEmpresaActual().size())
+                    cargarImagenes();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+        }
 }
+
