@@ -54,7 +54,7 @@ public class Buscar01 extends Fragment {
                 //Fragment perfilNegocio = new PerfilNegocio();
                 aGlobal.setIdEmpresaActual("entrenouscr");
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, new PerfilNegocio()).commit();
+                transaction.replace(R.id.content, new TabPost()).commit();
             }
         });
 
