@@ -64,8 +64,6 @@ public class Seguidores extends Fragment {
 
     public void cantidadSeguidores(){
         textView = (TextView) view.findViewById(R.id.cantidad);
-        for(int i=1; i< listItems.size(); i++){
-            textView.setText(i + " seguidores");
-        }
+        textView.setText(listItems.size() + " seguidores");
     }
 }

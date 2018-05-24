@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +31,7 @@ public class Registro01 extends AppCompatActivity {
         setContentView(R.layout.activity_registro01);
         getSupportActionBar().hide();
 
-        email = (EditText) findViewById(R.id.registerEmail);
+        email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.registerPassword);
 
         // Inicializando autenticación

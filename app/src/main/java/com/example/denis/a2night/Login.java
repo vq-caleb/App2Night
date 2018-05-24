@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
-
     private EditText email;
     private EditText password;
     // [START declare_auth]
@@ -100,8 +99,9 @@ public class Login extends AppCompatActivity {
                             Mensaje("Inicio de sesión corrrecto");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            //Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
-                            Intent intento1 = new Intent(getApplicationContext(), Principal.class);
+                            Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
+                            //Intent intento1 = new Intent(getApplicationContext(), SubirImagenes.class);
+
                             startActivity(intento1);
                         } else {
                             // If sign in fails, display a message to the user.

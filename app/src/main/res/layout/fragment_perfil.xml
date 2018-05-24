@@ -8,6 +8,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/contentPerfil"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fafafa">
@@ -73,7 +74,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
         <ScrollView
-            android:id="@+id/scroll01"
+            android:id="@+id/scrollPerfilUsuario"
             android:layout_width="match_parent"
             android:layout_height="333dp"
             android:layout_marginTop="48dp"
@@ -117,48 +118,48 @@
                     android:layout_marginStart="32dp"
                     android:background="@drawable/border_circle"
                     android:padding="16dp"
-                    android:tint="@android:color/darker_gray"
                     android:src="@drawable/ic_edit_black_24dp"
+                    android:tint="@android:color/darker_gray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/agregarPubli"
+                    android:id="@+id/agregarPublicacion"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/border_circle"
                     android:padding="16dp"
-                    android:tint="@android:color/darker_gray"
                     android:src="@drawable/ic_note_add_black_24dp"
+                    android:tint="@android:color/darker_gray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
                 <ImageView
-                    android:id="@+id/agregarProduc"
+                    android:id="@+id/imageView5"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/border_circle"
                     android:padding="16dp"
-                    android:tint="@android:color/darker_gray"
                     android:src="@drawable/ic_add_shopping_cart_black_24dp"
-                    app:layout_constraintEnd_toStartOf="@+id/cerrarSesion"
+                    android:tint="@android:color/darker_gray"
+                    app:layout_constraintEnd_toStartOf="@+id/salir"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/agregarPubli"
+                    app:layout_constraintStart_toEndOf="@+id/agregarPublicacion"
                     app:layout_constraintTop_toBottomOf="@+id/textView45" />
 
                 <ImageView
-                    android:id="@+id/cerrarSesion"
+                    android:id="@+id/salir"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/border_circle"
                     android:padding="16dp"
-                    android:tint="@android:color/darker_gray"
                     android:src="@drawable/ic_arrow_forward_black_24dp"
+                    android:tint="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView47" />
 
@@ -210,7 +211,7 @@
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/agregarPubli" />
+                    app:layout_constraintTop_toBottomOf="@+id/agregarPublicacion" />
 
                 <TextView
                     android:id="@+id/textView42"
@@ -223,7 +224,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/textView48"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/textView41"
-                    app:layout_constraintTop_toBottomOf="@+id/agregarProduc" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
                 <TextView
                     android:id="@+id/textView48"
@@ -232,10 +233,10 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginTop="16dp"
                     android:text="Cerrar sesión"
-                    android:textColor="@color/colorPrimary"
                     android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cerrarSesion" />
+                    app:layout_constraintTop_toBottomOf="@+id/salir" />
             </android.support.constraint.ConstraintLayout>
 
         </ScrollView>
