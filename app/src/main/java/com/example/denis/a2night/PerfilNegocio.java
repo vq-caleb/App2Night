@@ -220,7 +220,7 @@ public class PerfilNegocio extends Fragment {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             nombre = (child.child("nombre").getValue().toString());
                             precio = (child.child("precio").getValue().toString());
-                            imagen = "menus/" + aGlobal.getIdEmpresaActual() + "/" + nombre + ".jpg";
+                            imagen = "menus/" + aGlobal.getIdEmpresaActual() + "/" + nombre;
                             aGlobal.agregaProducto(new Producto(nombre, precio, imagen));
                             productosCargados++;
 
@@ -240,25 +240,26 @@ public class PerfilNegocio extends Fragment {
 
     }
 
-
-    public void cargarImagenes() {
+//
+    public void cargarImagenes(){
         final long ONE_MEGABYTE = 1024 * 1024;
         FirebaseStorage.getInstance().getReference().
                 child(aGlobal.getProductosEmpresaActual().get(this.index).getImagen()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 index++;
-                aGlobal.getProductosEmpresaActual().get(index - 1).setImagen2(bytes);
-                if (index < aGlobal.getProductosEmpresaActual().size())
+                aGlobal.getProductosEmpresaActual().get(index-1).setImagen2(bytes);
+                if(index < aGlobal.getProductosEmpresaActual().size())
                     cargarImagenes();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
+
             }
         });
     }
+
 
     public void verificaSeguidor() {
         db = FirebaseDatabase.getInstance();
