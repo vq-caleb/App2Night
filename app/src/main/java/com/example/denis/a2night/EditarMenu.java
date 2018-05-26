@@ -6,7 +6,9 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +23,19 @@ import android.widget.Toast;
 
 import com.example.denis.a2night.entidades.AlmacenamientoGlobal;
 import com.example.denis.a2night.entidades.Producto;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -35,18 +45,17 @@ public class EditarMenu extends Fragment {
 
     FirebaseDatabase db;
     DatabaseReference myRef;
-    View view;
-    TextView imagen, nombre, precio, eliminar, nombreProducto, precioProducto, editar;
-    ListView list;
-    static EditText Texto_01;
-    ImageView imageView;
-    ArrayList<String> uris = new ArrayList();
-    int cont = 0;
-    int index = 0;
-    Producto ObjEscogido;
     AlmacenamientoGlobal aGlobal = AlmacenamientoGlobal.getInstance();
-    ArrayAdapter<Producto> adapter;
-    private List<Producto> misObjetos = new ArrayList<Producto>();
+    private ArrayList<Producto> listItems = new ArrayList<>();
+    private ListView listView;
+    private AdapterItemMenu adapterItemMenu;
+    ImageView MiImageView;
+    String nombre,precio,imagen;
+    int productosCargados = 0;
+    int index = 0, lastIndex;
+    View view;
+    TextView imagenTV, nombreTV, precioTV, eliminarTV, nombreProducto, precioProducto;
+    static EditText Texto_01;
 
     public EditarMenu() {
         // Required empty public constructor
@@ -58,113 +67,128 @@ public class EditarMenu extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_editar_menu, container, false);
-        this.misObjetos = aGlobal.getProductosEmpresaActual();
+        cargaProductos();
+        listView = (ListView) view.findViewById(R.id.editarMenuProductos);
+        listView.setDivider(null);
 
-        RegistrarClicks();
-        Mensaje(aGlobal.getEmpresa().getNombre());
-        LlenarListView();
-
-        editar = (TextView) view.findViewById(R.id.editar);
-        editar.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                imagenTV = (TextView) view.findViewById(R.id.editarImagen);
+                nombreTV = (TextView) view.findViewById(R.id.editarNombre);
+                precioTV = (TextView) view.findViewById(R.id.editarPrecio);
+                eliminarTV = (TextView) view.findViewById(R.id.eliminar);
+                nombreProducto = (TextView) view.findViewById(R.id.nombreProduc);
+                precioProducto = (TextView) view.findViewById(R.id.precioProduc);
+                mostrarEdiciones();
+                eliminarProducto(""+i);
+                editarNombre(i);
+                editarPrecio(i);
             }
         });
 
-        list = (ListView) view.findViewById(R.id.editarMenuProductos);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-
-                imagen = (TextView) view.findViewById(R.id.editarImagen);
-                nombre = (TextView) view.findViewById(R.id.editarNombre);
-                precio = (TextView) view.findViewById(R.id.editarPrecio);
-                eliminar = (TextView) view.findViewById(R.id.eliminar);
-                nombreProducto = (TextView) view.findViewById(R.id.nombreProducto);
-                precioProducto = (TextView) view.findViewById(R.id.precioProducto);
-
-                eliminar.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View arg0) {
-                        borrarProducto(""+i);
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-
-                nombre.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DemeTexto_01(i, 1);
-                    }
-                });
-                precio = (TextView) view.findViewById(R.id.editarPrecio);
-                precio.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ObjEscogido = misObjetos.get(i);
-                        ModificarObjetoEnFirebase(i+"", ObjEscogido.getNombre(), "900", ObjEscogido.getImagen());
-                        misObjetos.get(i).setPrecio("900");
-                        //adapter.getItem(i).setPrecio("1212");
-                        adapter.notifyDataSetChanged();
-                        Mensaje(misObjetos.get(i).getPrecio().toString());
-                    }
-                });
-
-                if (imagen.getVisibility() == imagen.VISIBLE &&
-                        nombre.getVisibility() == nombre.VISIBLE &&
-                        precio.getVisibility() == precio.VISIBLE &&
-                        eliminar.getVisibility() == eliminar.VISIBLE){
-                    imagen.setVisibility(imagen.INVISIBLE);
-                    nombre.setVisibility(imagen.INVISIBLE);
-                    precio.setVisibility(imagen.INVISIBLE);
-                    eliminar.setVisibility(imagen.INVISIBLE);
-                } else {
-                    imagen.setVisibility(imagen.VISIBLE);
-                    nombre.setVisibility(imagen.VISIBLE);
-                    precio.setVisibility(imagen.VISIBLE);
-                    eliminar.setVisibility(imagen.VISIBLE);
-                }
-            }
-        });
         return view;
     }
 
-    private void LlenarListView() {
-        adapter = new MyListAdapter();
-        list = (ListView) view.findViewById(R.id.editarMenuProductos);
-        list.setDivider(null);
-        list.setAdapter(adapter);
+    public void cargaProductos(){
+        aGlobal.setProductosEmpresaActual(new ArrayList<Producto>());
+        db = FirebaseDatabase.getInstance();
+        db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            nombre = (child.child("nombre").getValue().toString());
+                            precio = (child.child("precio").getValue().toString());
+                            imagen = "menus/" + aGlobal.getIdEmpresaActual() + "/"+nombre+".jpg";
+                            listItems.add(new Producto(nombre,precio,imagen));
+                            productosCargados++;
+
+                            if(productosCargados ==  dataSnapshot.getChildrenCount()){
+                                lastIndex = aGlobal.getProductosEmpresaActual().size();
+                                //cargarImagenes();
+                            }
+                            LlenarListView(listItems);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d("---OBJECT-----", "-----ERROR2-----");
+                    }
+                });
     }
-    private void RegistrarClicks() {
 
-    }
-
-    private class MyListAdapter extends ArrayAdapter<Producto> {
-
-        public MyListAdapter() {
-
-            super(getActivity(), R.layout.lineaproducto, misObjetos);
-        }
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            if (itemView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.lineaproducto, parent, false);
+    /*public void cargarImagenes(){
+        final long ONE_MEGABYTE = 1024 * 1024;
+        FirebaseStorage.getInstance().getReference().
+                child(aGlobal.getProductosEmpresaActual().get(this.index).getImagen()).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                index++;
+                aGlobal.getProductosEmpresaActual().get(index-1).setImagen2(bytes);
+                if(index < aGlobal.getProductosEmpresaActual().size())
+                    cargarImagenes();
             }
-            Producto ObjetoActual = aGlobal.getProductosEmpresaActual().get(position);
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+    }*/
 
-            imageView = (ImageView)  itemView.findViewById(R.id.imgProducto);
+    private void LlenarListView(ArrayList<Producto> listItems) {
+        adapterItemMenu = new AdapterItemMenu(getActivity(), listItems);
+        listView.setAdapter(adapterItemMenu);
+    }
 
-            TextView elatributo01 = (TextView) itemView.findViewById(R.id.nombreProducto);
-            elatributo01.setText(ObjetoActual.getNombre());
-            TextView elatributo02 = (TextView) itemView.findViewById(R.id.precioProducto);
-            elatributo02.setText("" + ObjetoActual.getPrecio());
-//            Bitmap decodeByte = BitmapFactory.decodeByteArray(ObjetoActual.getImagen2(),0,ObjetoActual.getImagen2().length);
-  //          imageView.setImageBitmap(decodeByte);
-            return itemView;
-
+    public void mostrarEdiciones(){
+        if (imagenTV.getVisibility() == imagenTV.VISIBLE &&
+                nombreTV.getVisibility() == nombreTV.VISIBLE &&
+                precioTV.getVisibility() == precioTV.VISIBLE &&
+                eliminarTV.getVisibility() == eliminarTV.VISIBLE){
+            imagenTV.setVisibility(imagenTV.INVISIBLE);
+            nombreTV.setVisibility(nombreTV.INVISIBLE);
+            precioTV.setVisibility(precioTV.INVISIBLE);
+            eliminarTV.setVisibility(eliminarTV.INVISIBLE);
+        } else {
+            imagenTV.setVisibility(imagenTV.VISIBLE);
+            nombreTV.setVisibility(nombreTV.VISIBLE);
+            precioTV.setVisibility(precioTV.VISIBLE);
+            eliminarTV.setVisibility(eliminarTV.VISIBLE);
         }
+    }
+
+    public void eliminarProducto(final String pos){
+        eliminarTV.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                db = FirebaseDatabase.getInstance();
+                myRef = db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual());
+                myRef.child(pos).removeValue();
+                listItems.remove(pos);
+                listItems.clear();
+            }
+        });
+    }
+
+    public void editarNombre(final int pos){
+        nombreTV.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                DemeTexto_01(pos, 1);
+            }
+        });
+    }
+
+    public void editarPrecio(final int pos){
+        precioTV.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                DemeTexto_01(pos, 2);
+            }
+        });
     }
 
     public void DemeTexto_01(final int ubicacion, final int numero){
@@ -179,17 +203,18 @@ public class EditarMenu extends Fragment {
         builder1.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        ObjEscogido = misObjetos.get(ubicacion);
+                        String aux = Texto_01.getText().toString();
                         if(numero == 1){
-                            nombreProducto.setText(Texto_01.getText().toString());
-                            ModificarObjetoEnFirebase(ubicacion+"", Texto_01.getText().toString(), ObjEscogido.getPrecio(), ObjEscogido.getImagen());
+                            actualizarProducto(ubicacion+"", aux, listItems.get(ubicacion).getPrecio(),
+                                    listItems.get(ubicacion).getImagen());
+                            listItems.get(ubicacion).setNombre(aux);
+                            listItems.clear();
                         }
                         else{
-                            precioProducto.setText(Texto_01.getText().toString());
-                            ModificarObjetoEnFirebase(ubicacion+"", ObjEscogido.getNombre(), Texto_01.getText().toString(), ObjEscogido.getImagen());
-                            adapter.getItem(ubicacion).setPrecio(Texto_01.getText().toString());
-                            adapter.notifyDataSetChanged();
-                            Mensaje(adapter.getItem(ubicacion).getPrecio().toString());
+                            actualizarProducto(ubicacion+"", listItems.get(ubicacion).getNombre(),
+                                    aux, listItems.get(ubicacion).getImagen());
+                            listItems.get(ubicacion).setPrecio(aux);
+                            listItems.clear();
                         }
                     }
                 });
@@ -205,17 +230,12 @@ public class EditarMenu extends Fragment {
         alert11.show();
     };
 
-    public void ModificarObjetoEnFirebase(String objeto, String nombre, String precio, String imagen) {
+    public void actualizarProducto(String objeto, String nombre, String precio, String imagen) {
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual());
         imagen = "menus/" + aGlobal.getIdEmpresaActual() + "/"+nombre+".jpg";
         Producto  producto = new Producto(nombre, precio, imagen);
         myRef.child(objeto).setValue(producto);
-    }
-
-    public void borrarProducto(String nombreobj) {
-        myRef = db.getReference().child("Menu").child(aGlobal.getIdEmpresaActual());
-        myRef.child(nombreobj).removeValue();
     }
 
     public void Mensaje(String msg){ Toast.makeText(getActivity(), msg,Toast.LENGTH_SHORT).show();};
