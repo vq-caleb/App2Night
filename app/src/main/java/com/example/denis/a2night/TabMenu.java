@@ -75,7 +75,7 @@ public class TabMenu extends Fragment {
             public void onItemClick(AdapterView<?> parent, View viewClicked,
                                     int position, long id) {
                 Producto ObjEscogido = misObjetos.get(position);
-                Mensaje(ObjEscogido.getAtributo01());
+                Mensaje(ObjEscogido.getNombre());
             }
         });
     }
@@ -97,9 +97,9 @@ public class TabMenu extends Fragment {
             imageView = (ImageView)  itemView.findViewById(R.id.imgProducto);
 
             TextView elatributo01 = (TextView) itemView.findViewById(R.id.nombreProducto);
-            elatributo01.setText(ObjetoActual.getAtributo01());
+            elatributo01.setText(ObjetoActual.getNombre());
             TextView elatributo02 = (TextView) itemView.findViewById(R.id.precioProducto);
-            elatributo02.setText("" + ObjetoActual.getAtributo02());
+            elatributo02.setText("" + ObjetoActual.getPrecio());
             Bitmap decodeByte = BitmapFactory.decodeByteArray(ObjetoActual.getImagen2(),0,ObjetoActual.getImagen2().length);
             imageView.setImageBitmap(decodeByte);
             return itemView;

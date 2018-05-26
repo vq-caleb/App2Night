@@ -40,6 +40,7 @@ public class Perfil extends Fragment {
         OnclickDelButton(view.findViewById(R.id.seguidores));
         OnclickDelButton(view.findViewById(R.id.editarMenu));
         OnclickDelButton(view.findViewById(R.id.agregarPublicacion));
+        OnclickDelButton(view.findViewById(R.id.agregarProducto));
         OnclickDelButton(view.findViewById(R.id.salir));
 
         return view;
@@ -50,7 +51,6 @@ public class Perfil extends Fragment {
         opciones.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // if(msg.equals("Texto")){Mensaje("Texto en el botón ");};
                 switch (v.getId()) {
 
                     case R.id.editarPerfil:
@@ -66,12 +66,17 @@ public class Perfil extends Fragment {
 
                     case R.id.editarMenu:
                         FragmentTransaction transaction3 = getFragmentManager().beginTransaction();
-                        transaction3.replace(R.id.content, new TabMenu()).commit();
+                        transaction3.replace(R.id.content, new EditarMenu()).commit();
                         break;
 
                     case R.id.agregarPublicacion:
                         FragmentTransaction transaction4 = getFragmentManager().beginTransaction();
                         transaction4.replace(R.id.content, new AgregarPublicacion()).commit();
+                        break;
+
+                    case R.id.agregarProducto:
+                        FragmentTransaction transaction5 = getFragmentManager().beginTransaction();
+                        transaction5.replace(R.id.content, new AgregarProducto()).commit();
                         break;
 
                     case R.id.salir:
