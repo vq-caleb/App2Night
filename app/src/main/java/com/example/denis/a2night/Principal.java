@@ -21,11 +21,11 @@ public class Principal extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            Mensaje("Habemus login");
             Intent intento1 = new Intent(getApplicationContext(), Navegador.class);
             startActivity(intento1);
         } else {
-            Mensaje("Hostia chaval inicia sesión");
+            Intent intento1 = new Intent(getApplicationContext(), Login.class);
+            startActivity(intento1);
         }
 
         OnclickDelButton(R.id.btnLogin);

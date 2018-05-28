@@ -42,17 +42,12 @@ public class Seguidores extends Fragment {
     }
 
     private void LlenarListView() {
-        listItems.add("Dwight D. Eisenhower");
-        listItems.add("John F. Kennedy");
-        listItems.add("Richard Nixon");
-        listItems.add("Lyndon B. Johnson");
-        listItems.add("Gerald Ford");
-        listItems.add("Jimmy Carter");
-        listItems.add("Ronald Reagan");
-        listItems.add("George H. W. Bush");
-        listItems.add("Bill Clinton");
-        listItems.add("George W. Bush");
-        listItems.add("Barack Obama");
+        listItems.add("Caleb Villalta");
+        listItems.add("Steven Calderon");
+        listItems.add("Anthony Soto");
+        listItems.add("Esteban Ramirez");
+        listItems.add("Bernal Villalobos");
+        listItems.add("Jose Castillo");
 
     ArrayAdapter<String> adaptador =new ArrayAdapter(getActivity(),
             android.R.layout.simple_list_item_1, listItems);

@@ -8,12 +8,19 @@ import com.bumptech.glide.request.target.ImageViewTarget;
 
 public class Item {
     private String name;
-    private int length;
-    //private ImageViewTarget
+    private String circleView;
+    private String length;
+    private String horas;
+    private String nombreD;
+    private String descripcion;
 
-    public Item(String name, int length) {
+    public Item(String name, String circleView, String length, String horas, String nombreD, String descripcion) {
         this.name = name;
+        this.circleView = circleView;
         this.length = length;
+        this.horas = horas;
+        this.nombreD = nombreD;
+        this.descripcion = descripcion;
     }
 
     public String getName() {
@@ -24,11 +31,43 @@ public class Item {
         this.name = name;
     }
 
-    public int getLength() {
+    public String getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(String length) {
         this.length = length;
+    }
+
+    public String getCircleView() {
+        return circleView;
+    }
+
+    public void setCircleView(String circleView) {
+        this.circleView = circleView;
+    }
+
+    public String getHoras() {
+        return horas;
+    }
+
+    public void setHoras(String horas) {
+        this.horas = horas;
+    }
+
+    public String getNombreD() {
+        return nombreD;
+    }
+
+    public void setNombreD(String nombreD) {
+        this.nombreD = nombreD;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
